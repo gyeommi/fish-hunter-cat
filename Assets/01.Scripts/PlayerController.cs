@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,6 +14,11 @@ public class PlayerController : MonoBehaviour
     float dir;
     bool isGround;
 
+    float dashPower;
+    float dashCoolTime;
+    bool canDash;
+    bool isDashing;
+
     int jumpCount;
     int jumpCountMax;
 
@@ -26,6 +32,11 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        dashPower = 15f;
+        dashCoolTime = 1f;
+        canDash = true;
+        isDashing = false;
+
         jumpCount = 0;
         jumpCountMax = 2;
     }
@@ -44,10 +55,18 @@ public class PlayerController : MonoBehaviour
         {
             Jump();
         }
+
+        if (Keyboard.current.leftShiftKey.wasPressedThisFrame)
+        {
+            Dash();
+        }
     }
 
     private void FixedUpdate()
     {
+        if (isDashing)
+            return;
+
         if (dir != 0)
         {
             if (dir > 0)
@@ -79,5 +98,29 @@ public class PlayerController : MonoBehaviour
             jumpCount++;
         else
             jumpCount += 2;
+    }
+
+    void Dash()
+    {
+        if (!canDash || isDashing)
+            return;
+
+        canDash = false;
+        isDashing = true;
+
+        float direction = playerSpriteRenderer.flipX ? -1f : 1f;
+
+        rb.linearVelocity = new Vector2(direction * dashPower, 0);
+
+        StartCoroutine(DashCoolTime());
+    }
+
+    IEnumerator DashCoolTime()
+    {
+        yield return new WaitForSeconds(0.2f);
+        isDashing = false;
+        
+        yield return new WaitForSeconds(dashCoolTime);
+        canDash = true;
     }
 }
