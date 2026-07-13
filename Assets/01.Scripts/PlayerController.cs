@@ -8,8 +8,8 @@ public class PlayerController : MonoBehaviour
     
     private SpriteRenderer playerSpriteRenderer;
 
-    [SerializeField] float moveSpeed = 3f;
-    [SerializeField] float jumpPower = 5f;
+    float moveSpeed = 3f;
+    float jumpPower = 5f;
 
     float dir;
     bool isGround;
@@ -21,6 +21,12 @@ public class PlayerController : MonoBehaviour
 
     int jumpCount;
     int jumpCountMax;
+
+    Animator animator;
+
+    int isMove;
+    int isJump;
+    int isDash;
 
     [SerializeField] LayerMask groundLayer;
 
@@ -39,6 +45,11 @@ public class PlayerController : MonoBehaviour
 
         jumpCount = 0;
         jumpCountMax = 2;
+
+        animator = GetComponent<Animator>();
+        isMove = Animator.StringToHash("isMove");
+        isJump = Animator.StringToHash("isJump");
+        isDash = Animator.StringToHash("isDash");
     }
 
     void Update()
@@ -60,6 +71,17 @@ public class PlayerController : MonoBehaviour
         {
             Dash();
         }
+
+        if (dir == 0)
+        {
+            animator.SetBool(isMove, false);
+        }
+        else
+        {
+            animator.SetBool(isMove, true);
+        }
+
+        animator.SetBool(isJump, !isGround);
     }
 
     private void FixedUpdate()
@@ -112,15 +134,20 @@ public class PlayerController : MonoBehaviour
 
         rb.linearVelocity = new Vector2(direction * dashPower, 0);
 
+        animator.SetBool(isDash, true);
+
         StartCoroutine(DashCoolTime());
     }
 
     IEnumerator DashCoolTime()
     {
         yield return new WaitForSeconds(0.2f);
+
         isDashing = false;
-        
+        animator.SetBool(isDash, false);
+
         yield return new WaitForSeconds(dashCoolTime);
+        
         canDash = true;
     }
 }
