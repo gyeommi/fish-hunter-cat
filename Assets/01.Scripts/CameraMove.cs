@@ -4,8 +4,8 @@ public class CameraMove : MonoBehaviour
 {
     [SerializeField] Transform target;
 
-    Vector3 velocity;
-    Vector3 targetPos;
+    private Vector3 velocity;
+    private Vector3 targetPos;
 
     void Start()
     {
