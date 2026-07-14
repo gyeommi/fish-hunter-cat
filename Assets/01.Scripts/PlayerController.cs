@@ -6,21 +6,20 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb;
     
-    private SpriteRenderer playerSpriteRenderer;
+    private SpriteRenderer sr;
 
-    float moveSpeed = 3f;
+    float speed = 3f;
     float jumpPower = 5f;
 
     float dir;
     bool isGround;
+    int jumpCount;
+    int jumpCountMax;
 
     float dashPower;
     float dashCoolTime;
     bool canDash;
     bool isDashing;
-
-    int jumpCount;
-    int jumpCountMax;
 
     Animator animator;
 
@@ -30,13 +29,29 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] LayerMask groundLayer;
 
+    [SerializeField] float maxHP;
+    [SerializeField] float nowHP;
+    [SerializeField] int nowLife;
+    [SerializeField] int maxLife;
+
+
+    [SerializeField] PlayerHealth health;
+
+    private void OnEnable()
+    {
+        nowHP = 20;
+        maxHP = 20;
+        nowLife = 3;
+        maxLife = 3;
+    }
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        playerSpriteRenderer = GetComponent<SpriteRenderer>();
+        sr = GetComponent<SpriteRenderer>();
     }
 
-    void Start()
+    private void Start()
     {
         dashPower = 15f;
         dashCoolTime = 1f;
@@ -52,7 +67,7 @@ public class PlayerController : MonoBehaviour
         isDash = Animator.StringToHash("isDash");
     }
 
-    void Update()
+    private void Update()
     {
         dir = 0;
         if (Keyboard.current.aKey.isPressed)
@@ -92,14 +107,44 @@ public class PlayerController : MonoBehaviour
         if (dir != 0)
         {
             if (dir > 0)
-                playerSpriteRenderer.flipX = false;
+                sr.flipX = false;
             else
-                playerSpriteRenderer.flipX = true;
+                sr.flipX = true;
         }
-        rb.linearVelocity = new Vector2(dir * moveSpeed, rb.linearVelocity.y);
+        rb.linearVelocity = new Vector2(dir * speed, rb.linearVelocity.y);
     }
 
-    void GroundCheck()
+    public void TakeDamage(int damage)
+    {
+        nowHP -= damage;
+        health.SetHPGauge(nowHP / maxHP);
+        if (nowHP < 0)
+        {
+            nowHP = 0;
+            Die();
+        }
+    }
+
+    public void ResetPlayer()
+    {
+        nowHP = maxHP;
+        nowLife = maxLife;
+        health.SetHPGauge(nowHP / maxHP);
+        transform.position = new Vector3(0, 0, 0);
+    }
+
+    private void Die()
+    {
+        if (nowLife <= 0)
+        {
+            nowLife = 0;
+            StageManager.instance.GameOver();
+        }
+        health.SetLifeGauge(nowLife);
+        nowLife--;
+    }
+
+    private void GroundCheck()
     {
         RaycastHit2D hit = Physics2D.CircleCast(transform.position, 0.3f, Vector2.down, 0.8f, groundLayer);
 
@@ -109,7 +154,7 @@ public class PlayerController : MonoBehaviour
             jumpCount = 0;
     }
 
-    void Jump()
+    private void Jump()
     {
         if (jumpCount >= jumpCountMax)
             return;
@@ -122,7 +167,7 @@ public class PlayerController : MonoBehaviour
             jumpCount += 2;
     }
 
-    void Dash()
+    private void Dash()
     {
         if (!canDash || isDashing)
             return;
@@ -130,7 +175,7 @@ public class PlayerController : MonoBehaviour
         canDash = false;
         isDashing = true;
 
-        float direction = playerSpriteRenderer.flipX ? -1f : 1f;
+        float direction = sr.flipX ? -1f : 1f;
 
         rb.linearVelocity = new Vector2(direction * dashPower, 0);
 
