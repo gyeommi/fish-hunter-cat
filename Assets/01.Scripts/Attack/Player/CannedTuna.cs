@@ -2,35 +2,23 @@ using UnityEngine;
 
 public class CannedTuna : MonoBehaviour
 {
-    [SerializeField] float speed = 5f;
-    float lifeTime;
-
-    float timer;
-
+    [SerializeField] float speed = 8f;
+    
     Rigidbody2D rb;
-    Vector2 dir;
+    
+    float timer;
+    float lifeTime = 3f;
+
     int damage;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        lifeTime = 3f;
-        timer = 0f;
     }
 
     private void OnEnable()
     {
         timer = 0f;
-    }
-
-    public void SetDirection(Vector2 direction)
-    {
-        dir = direction;
-    }
-
-    public void SetDamage(int dmg)
-    {
-        damage = dmg;
     }
 
     void Update()
@@ -45,9 +33,12 @@ public class CannedTuna : MonoBehaviour
     {
         timer += Time.fixedDeltaTime;
 
-        rb.linearVelocity = dir * speed;
+        rb.linearVelocity = transform.right * speed;
+    }
 
-        rb.MoveRotation(rb.rotation + -180f * Time.fixedDeltaTime);
+    public void SetDamage(int dmg)
+    {
+        damage = dmg;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -63,6 +54,5 @@ public class CannedTuna : MonoBehaviour
     void ReturnPool()
     {
         ObjectPoolManager.instance.ReturnObject("CannedTuna", this.gameObject);
-        transform.rotation = Quaternion.identity;
     }
 }

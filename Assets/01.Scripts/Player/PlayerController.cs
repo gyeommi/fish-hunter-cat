@@ -29,13 +29,14 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] LayerMask groundLayer;
 
-    [SerializeField] float maxHP;
     [SerializeField] float nowHP;
     [SerializeField] int nowLife;
-    [SerializeField] int maxLife;
-
+    float maxHP;
+    int maxLife;
 
     [SerializeField] PlayerHealth health;
+
+    [SerializeField] Transform respawnPoint;
 
     private void OnEnable()
     {
@@ -129,19 +130,22 @@ public class PlayerController : MonoBehaviour
     {
         nowHP = maxHP;
         nowLife = maxLife;
+        health.SetLife();
         health.SetHPGauge(nowHP / maxHP);
         transform.position = new Vector3(0, 0, 0);
     }
 
-    private void Die()
+    public void Die()
     {
         if (nowLife <= 0)
         {
-            nowLife = 0;
             StageManager.instance.GameOver();
+            nowLife = 0;
         }
-        health.SetLifeGauge(nowLife);
         nowLife--;
+        health.DecreaseLife(nowLife);
+
+        transform.position = respawnPoint.position;
     }
 
     private void GroundCheck()
