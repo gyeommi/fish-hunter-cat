@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer sr;
 
     float speed = 3f;
-    float jumpPower = 5f;
+    float jumpPower = 7f;
 
     float dir;
     bool isGround;

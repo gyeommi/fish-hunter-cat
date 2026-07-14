@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 6116692917939382250}
   - component: {fileID: 2236868500649872912}
   - component: {fileID: 288680772136250684}
-  - component: {fileID: 3803444027579763510}
-  m_Layer: 0
+  - component: {fileID: -3985031982365407363}
+  m_Layer: 10
   m_Name: CannedTuna
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -167,7 +167,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 4.02, y: 3.52}
   m_EdgeRadius: 0
---- !u!114 &3803444027579763510
+--- !u!114 &-3985031982365407363
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -179,4 +179,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4945f63c8c85a845a0f44f5836469fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CannedTuna
-  speed: 5
+  speed: 8
