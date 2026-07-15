@@ -20,6 +20,8 @@ public class EnemyController : MonoBehaviour
     
     EnemyWeapon enemyWeapon;
 
+    Tween idleTween;
+
     Vector3 startPos;
 
     private void OnEnable()
@@ -52,6 +54,10 @@ public class EnemyController : MonoBehaviour
 
     public void ResetEnemy()
     {
+        idleTween?.Kill();
+        idleTween = null;
+        transform.position = startPos;
+
         transform.position = startPos;
         
         nowHP = maxHP;
@@ -85,8 +91,19 @@ public class EnemyController : MonoBehaviour
         enemyWeapon.CanAttack(true);
     }
 
+    public void Idle()
+    {
+        if (idleTween != null && idleTween.IsActive())
+            return;
+
+        idleTween = transform.DOMoveX(startPos.x + 2f, 1f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.Linear);
+    }
+
     public void Trace()
     {
+        idleTween?.Kill();
+        idleTween = null;
+
         enemyWeapon.CanAttack(false);
 
         sr.flipX = CheckFlip();
@@ -126,6 +143,9 @@ public class EnemyController : MonoBehaviour
     
     void Die()
     {
+        idleTween?.Kill();
+        idleTween = null;
+
         StageManager.instance.RemoveEnemy(gameObject, startPos);
     }
 }

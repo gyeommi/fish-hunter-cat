@@ -26,5 +26,7 @@ public class EnemyIdleState : EnemyBaseState
 
         if (enemy.IsDetectPlayer())
             stateMachine.ChangeState(stateMachine.traceState);
+
+        enemy.Idle();
     }
 }
