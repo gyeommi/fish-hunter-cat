@@ -153,7 +153,7 @@ public class PlayerController : MonoBehaviour
 
         Respawn();
     }
-
+    
     void Respawn()
     {
         transform.position = respawnPoint.position;

@@ -888,7 +888,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2279d82576472e343902930719d8cb4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StageManager
-  enemyList: []
 --- !u!4 &300169660
 Transform:
   m_ObjectHideFlags: 0
@@ -15950,7 +15949,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_MaskInteraction: 0
   m_Sprite: {fileID: -5344282045738083563, guid: 2249777adce66914f8e3a8c93f7df90e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -16066,6 +16065,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ObjectPoolManager
   objList:
   - {fileID: 329935707198677386, guid: 6c0bbe8c2abe5684e85f488e875dac02, type: 3}
+  - {fileID: 4766832611570348663, guid: 64c44d8cb81cdcd4c86acd1ae7b01ef0, type: 3}
 --- !u!4 &1375765034
 Transform:
   m_ObjectHideFlags: 0
@@ -19506,6 +19506,7 @@ GameObject:
   - component: {fileID: 2044364627}
   - component: {fileID: 2044364631}
   - component: {fileID: 2044364630}
+  - component: {fileID: 2044364632}
   m_Layer: 12
   m_Name: Enemy
   m_TagString: Untagged
@@ -19639,6 +19640,21 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.14
+--- !u!114 &2044364632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2044364626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e4f254a69516f34e8722342a79ce7fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyRangedWeapon
+  damage: 3
+  range: 10
+  delay: 1
 --- !u!1 &2049677050
 GameObject:
   m_ObjectHideFlags: 0

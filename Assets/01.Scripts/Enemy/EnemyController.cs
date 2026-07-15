@@ -11,9 +11,13 @@ public class EnemyController : MonoBehaviour
     [SerializeField] float attackRange;
 
     float moveSpeed;
+    float attackCoolTime = 1f;
+    float attackTimer;
 
     Transform target;
     SpriteRenderer sr;
+
+    EnemyWeapon enemyWeapon;
 
     Vector3 startPos;
 
@@ -31,6 +35,7 @@ public class EnemyController : MonoBehaviour
         moveSpeed = 3f;
 
         sr = GetComponent<SpriteRenderer>();
+        enemyWeapon = GetComponent<EnemyWeapon>();
         target = GameObject.FindWithTag("Player").transform;
 
         stateMachine = new EnemyStateMachine(this);
@@ -39,6 +44,7 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
+        attackTimer += Time.deltaTime;
         stateMachine.Update();
     }
 
@@ -65,20 +71,34 @@ public class EnemyController : MonoBehaviour
 
     public void Attack()
     {
-        //공격 -> 플레이어 방향으로 공격,,
+        if (attackTimer < attackCoolTime)
+            return;
+
+        attackTimer = 0f;
+
+        float distance = Vector3.Distance(transform.position, target.position);
+        
+        enemyWeapon.SetDirection(GetDirection());
+        enemyWeapon.SetDistance(distance);
+        enemyWeapon.CanAttack(true);
     }
 
     public void Trace()
     {
-        //추적 -> 플레이어 방향으로 이동..
-        sr.flipX = CheckFlip();
+        enemyWeapon.CanAttack(false);
 
+        sr.flipX = CheckFlip();
         Move();
     }
 
     void Move()
     {
         transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
+    }
+
+    Vector2 GetDirection()
+    {
+        return target.position - transform.position;
     }
 
     bool CheckFlip()

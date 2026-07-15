@@ -4,10 +4,12 @@ public class EnemyStateMachine : StateMachine
 {
     public EnemyIdleState idleState;
     public EnemyTraceState traceState;
+    public EnemyAttackState attackState;
 
     public EnemyStateMachine(EnemyController enemy)
     {
         idleState = new EnemyIdleState(enemy, this);
         traceState = new EnemyTraceState(enemy, this);
+        attackState = new EnemyAttackState(enemy, this);
     }
 }

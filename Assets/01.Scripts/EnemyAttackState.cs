@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class EnemyTraceState : EnemyBaseState
+public class EnemyAttackState : EnemyBaseState
 {
-    public EnemyTraceState(EnemyController enemy, EnemyStateMachine stateMachine) : base(enemy, stateMachine)
+    public EnemyAttackState(EnemyController enemy, EnemyStateMachine stateMachine) : base(enemy, stateMachine)
     {
     }
 
@@ -31,12 +31,12 @@ public class EnemyTraceState : EnemyBaseState
             return;
         }
 
-        if (enemy.IsAttackRange())
+        if (!enemy.IsAttackRange())
         {
-            stateMachine.ChangeState(stateMachine.attackState);
+            stateMachine.ChangeState(stateMachine.traceState);
             return;
         }
 
-        enemy.Trace();
+        enemy.Attack();
     }
 }
