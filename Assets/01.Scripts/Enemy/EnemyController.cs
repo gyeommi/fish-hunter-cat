@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
@@ -16,7 +17,7 @@ public class EnemyController : MonoBehaviour
 
     Transform target;
     SpriteRenderer sr;
-
+    
     EnemyWeapon enemyWeapon;
 
     Vector3 startPos;
@@ -35,6 +36,7 @@ public class EnemyController : MonoBehaviour
         moveSpeed = 3f;
 
         sr = GetComponent<SpriteRenderer>();
+
         enemyWeapon = GetComponent<EnemyWeapon>();
         target = GameObject.FindWithTag("Player").transform;
 
@@ -109,6 +111,12 @@ public class EnemyController : MonoBehaviour
     public void TakeDamage(int damage)
     {
         nowHP -= damage;
+
+        sr.DOKill();
+
+        sr.color = Color.white;
+        sr.DOColor(Color.red, 0.2f).OnComplete(() => { sr.DOColor(Color.white, 0.2f); });
+
         if (nowHP <= 0)
         {
             nowHP = 0;

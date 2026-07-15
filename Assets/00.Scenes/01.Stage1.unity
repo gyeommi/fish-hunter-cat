@@ -19654,7 +19654,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyRangedWeapon
   damage: 3
   range: 10
-  delay: 1
+  delay: 2
 --- !u!1 &2049677050
 GameObject:
   m_ObjectHideFlags: 0
