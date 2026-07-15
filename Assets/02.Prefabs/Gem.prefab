@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 4302667734339938225}
   - component: {fileID: 1624557192574838908}
   - component: {fileID: 7811096461749149213}
-  - component: {fileID: -1919780691776312050}
+  - component: {fileID: 4611148873086262066}
+  - component: {fileID: 8269837733712843645}
   m_Layer: 0
   m_Name: Gem
   m_TagString: Untagged
@@ -115,8 +116,8 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!61 &-1919780691776312050
-BoxCollider2D:
+--- !u!58 &4611148873086262066
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -149,15 +150,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.16, y: 0.15}
-    newSize: {x: 0.16, y: 0.15}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 0.16, y: 0.15}
-  m_EdgeRadius: 0
+  m_Offset: {x: 0, y: 0.005}
+  m_Radius: 0.08
+--- !u!114 &8269837733712843645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2040467429394831298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6662f4a2933c4041a124377726713b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Gem

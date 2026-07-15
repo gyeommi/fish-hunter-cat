@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,7 +8,9 @@ public class StageManager : MonoBehaviour
 
     private int currentStage;
 
-    public List<GameObject> enemyList;
+    List<EnemyController> enemies = new();
+    Dictionary<GameObject, Vector3> allEnemies;
+    Dictionary<GameObject, Vector3> deadEnemies;
 
     private void Awake()
     {
@@ -23,7 +24,8 @@ public class StageManager : MonoBehaviour
     private void Start()
     {
         currentStage = SceneManager.GetActiveScene().buildIndex;
-        enemyList = new List<GameObject>();
+        allEnemies = new Dictionary<GameObject, Vector3>();
+        deadEnemies = new Dictionary<GameObject, Vector3>();
     }
 
     public void GameStart()
@@ -57,18 +59,34 @@ public class StageManager : MonoBehaviour
 #endif
     }
 
-    public void RemoveEnemy(GameObject monster)
+    public void RegisterEnemy(EnemyController enemy)
     {
-        enemyList.Add(monster);
-        monster.SetActive(false);
+        if (!enemies.Contains(enemy))
+            enemies.Add(enemy);
+    }
+
+    public void ResetEnemy()
+    {
+        foreach (EnemyController enemy in enemies)
+        {
+            enemy.ResetEnemy();
+        }
+        deadEnemies.Clear();
+    }
+
+    public void RemoveEnemy(GameObject enemy, Vector3 pos)
+    {
+        deadEnemies.Add(enemy, pos);
+        enemy.SetActive(false);
     }
 
     public void ActiveEnemy()
     {
-        for (int i = 0; i < enemyList.Count; i++)
+        foreach (var enemy in deadEnemies)
         {
-            enemyList[i].SetActive(true);
+            enemy.Key.transform.position = enemy.Value;
+            enemy.Key.SetActive(true);
         }
-        enemyList.Clear();
+        deadEnemies.Clear();
     }
 }

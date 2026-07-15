@@ -15,6 +15,8 @@ public class EnemyController : MonoBehaviour
     Transform target;
     SpriteRenderer sr;
 
+    Vector3 startPos;
+
     private void OnEnable()
     {
         nowHP = maxHP;
@@ -22,6 +24,10 @@ public class EnemyController : MonoBehaviour
 
     void Start()
     {
+        startPos = transform.position;
+
+        StageManager.instance.RegisterEnemy(this);
+        
         moveSpeed = 3f;
 
         sr = GetComponent<SpriteRenderer>();
@@ -34,6 +40,17 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
         stateMachine.Update();
+    }
+
+    public void ResetEnemy()
+    {
+        transform.position = startPos;
+        
+        nowHP = maxHP;
+
+        gameObject.SetActive(true);
+
+        stateMachine.ChangeState(stateMachine.idleState);
     }
 
     public bool IsDetectPlayer()
@@ -81,6 +98,6 @@ public class EnemyController : MonoBehaviour
     
     void Die()
     {
-        StageManager.instance.RemoveEnemy(gameObject);
+        StageManager.instance.RemoveEnemy(gameObject, startPos);
     }
 }

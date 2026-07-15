@@ -157,7 +157,7 @@ public class PlayerController : MonoBehaviour
     void Respawn()
     {
         transform.position = respawnPoint.position;
-        StageManager.instance.ActiveEnemy();
+        StageManager.instance.ResetEnemy();
     }
 
     private void GroundCheck()
