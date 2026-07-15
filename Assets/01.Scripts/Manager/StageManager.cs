@@ -1,3 +1,5 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,6 +8,8 @@ public class StageManager : MonoBehaviour
     public static StageManager instance;
 
     private int currentStage;
+
+    public List<GameObject> enemyList;
 
     private void Awake()
     {
@@ -19,6 +23,7 @@ public class StageManager : MonoBehaviour
     private void Start()
     {
         currentStage = SceneManager.GetActiveScene().buildIndex;
+        enemyList = new List<GameObject>();
     }
 
     public void GameStart()
@@ -52,8 +57,18 @@ public class StageManager : MonoBehaviour
 #endif
     }
 
-    public void RemoveMonster(GameObject monster)
+    public void RemoveEnemy(GameObject monster)
     {
+        enemyList.Add(monster);
         monster.SetActive(false);
+    }
+
+    public void ActiveEnemy()
+    {
+        for (int i = 0; i < enemyList.Count; i++)
+        {
+            enemyList[i].SetActive(true);
+        }
+        enemyList.Clear();
     }
 }

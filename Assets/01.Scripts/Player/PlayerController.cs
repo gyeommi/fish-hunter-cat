@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     int isMove;
     int isJump;
     int isDash;
+    int damageHash;
 
     [SerializeField] LayerMask groundLayer;
 
@@ -66,6 +67,7 @@ public class PlayerController : MonoBehaviour
         isMove = Animator.StringToHash("isMove");
         isJump = Animator.StringToHash("isJump");
         isDash = Animator.StringToHash("isDash");
+        damageHash = Animator.StringToHash("damage");
     }
 
     private void Update()
@@ -118,6 +120,7 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage(float damage)
     {
         nowHP -= damage;
+        animator.SetTrigger(damageHash);
         health.SetHPGauge(nowHP / maxHP);
         if (nowHP <= 0)
         {
@@ -148,7 +151,13 @@ public class PlayerController : MonoBehaviour
         nowHP = maxHP;
         health.SetHPGauge(nowHP / maxHP);
 
+        Respawn();
+    }
+
+    void Respawn()
+    {
         transform.position = respawnPoint.position;
+        StageManager.instance.ActiveEnemy();
     }
 
     private void GroundCheck()

@@ -81,6 +81,6 @@ public class EnemyController : MonoBehaviour
     
     void Die()
     {
-        StageManager.instance.RemoveMonster(gameObject);
+        StageManager.instance.RemoveEnemy(gameObject);
     }
 }

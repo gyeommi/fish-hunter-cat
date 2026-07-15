@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2236868500649872912}
   - component: {fileID: 288680772136250684}
   - component: {fileID: -3985031982365407363}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: CannedTuna
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -31,8 +31,7 @@ public class CatClaw : PlayerWeapon
             {
                 monster.GetComponent<EnemyController>()?.TakeDamage(damage);
             }
-
-            // 공격 애니메이션 실행
+            //애니메이션 실행
         }
     }
 
