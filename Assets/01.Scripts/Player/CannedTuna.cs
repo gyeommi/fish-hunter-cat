@@ -46,7 +46,7 @@ public class CannedTuna : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             //몬스터 데미지 입히기
-            //collision.gameObject.GetComponent<MonsterController>().TakeDamage(damage);
+            collision.gameObject.GetComponent<EnemyController>().TakeDamage(damage);
             ReturnPool();
         }
 

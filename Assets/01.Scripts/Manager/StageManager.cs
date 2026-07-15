@@ -51,4 +51,9 @@ public class StageManager : MonoBehaviour
         Application.Quit();
 #endif
     }
+
+    public void RemoveMonster(GameObject monster)
+    {
+        monster.SetActive(false);
+    }
 }

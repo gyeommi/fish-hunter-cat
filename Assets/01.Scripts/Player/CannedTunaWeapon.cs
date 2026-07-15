@@ -10,7 +10,7 @@ public class CannedTunaWeapon : PlayerWeapon
     protected override void Start()
     {
         base.Start();
-        camera = Camera.main;
+        damage = 5;
     }
 
     private void Update()
@@ -27,7 +27,7 @@ public class CannedTunaWeapon : PlayerWeapon
 
             tuna.transform.position = firePosition.position;
             tuna.transform.rotation = transform.rotation;
-            tuna.GetComponent<CannedTuna>().SetDamage(5);
+            tuna.GetComponent<CannedTuna>().SetDamage(damage);
             canAttack = false;
         }
     }

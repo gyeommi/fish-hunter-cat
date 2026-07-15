@@ -10,6 +10,7 @@ public class CatClaw : PlayerWeapon
     protected override void Start()
     {
         base.Start();
+        damage = 3;
     }
 
     void Update()
@@ -24,12 +25,11 @@ public class CatClaw : PlayerWeapon
         {
             canAttack = false;
 
-            Collider2D[] monsters =
-                Physics2D.OverlapCircleAll(attackPoint.position, attackRadius, monsterLayer);
+            Collider2D[] monsters = Physics2D.OverlapCircleAll(attackPoint.position, attackRadius, monsterLayer);
 
             foreach (Collider2D monster in monsters)
             {
-                //monster.GetComponent<MonsterController>()?.TakeDamage(damage);
+                monster.GetComponent<EnemyController>()?.TakeDamage(damage);
             }
 
             // 공격 애니메이션 실행

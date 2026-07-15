@@ -115,11 +115,11 @@ public class PlayerController : MonoBehaviour
         rb.linearVelocity = new Vector2(dir * speed, rb.linearVelocity.y);
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         nowHP -= damage;
         health.SetHPGauge(nowHP / maxHP);
-        if (nowHP < 0)
+        if (nowHP <= 0)
         {
             nowHP = 0;
             Die();
@@ -144,6 +144,9 @@ public class PlayerController : MonoBehaviour
         }
         nowLife--;
         health.DecreaseLife(nowLife);
+        
+        nowHP = maxHP;
+        health.SetHPGauge(nowHP / maxHP);
 
         transform.position = respawnPoint.position;
     }
