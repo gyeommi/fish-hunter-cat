@@ -23,6 +23,11 @@ public class Bullet : MonoBehaviour
         timer = 0f;
     }
 
+    private void OnDisable()
+    {
+        ReturnPool();
+    }
+
     void Update()
     {
         if (timer >= lifeTime)

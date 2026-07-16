@@ -65,6 +65,7 @@ public class EnemyController : MonoBehaviour
         gameObject.SetActive(true);
 
         stateMachine.ChangeState(stateMachine.idleState);
+        enemyWeapon.CanAttack(false);
     }
 
     public bool IsDetectPlayer()
@@ -125,7 +126,7 @@ public class EnemyController : MonoBehaviour
         return transform.position.x > target.position.x ? true : false;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         nowHP -= damage;
 

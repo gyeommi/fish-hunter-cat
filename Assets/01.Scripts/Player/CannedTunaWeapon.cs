@@ -10,7 +10,7 @@ public class CannedTunaWeapon : PlayerWeapon
     protected override void Start()
     {
         base.Start();
-        damage = 5;
+        damage = PlayerStats.instance.SetRangedDamage();
     }
 
     private void Update()

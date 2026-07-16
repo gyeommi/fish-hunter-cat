@@ -133,7 +133,7 @@ public class PlayerController : MonoBehaviour
     {
         nowHP = maxHP;
         nowLife = maxLife;
-        health.SetLife();
+        health.ResetLife();
         health.SetHPGauge(nowHP / maxHP);
         transform.position = new Vector3(0, 0, 0);
     }
@@ -185,6 +185,9 @@ public class PlayerController : MonoBehaviour
 
     private void Dash()
     {
+        if (!PlayerStats.instance.isUnlockDash)
+            return;
+
         if (!canDash || isDashing)
             return;
 
@@ -193,7 +196,7 @@ public class PlayerController : MonoBehaviour
 
         float direction = sr.flipX ? -1f : 1f;
 
-        rb.linearVelocity = new Vector2(direction * dashPower, 0);
+        rb.linearVelocity = new Vector2(direction * PlayerStats.instance.dashPower, 0);
 
         animator.SetBool(isDash, true);
 
@@ -207,7 +210,7 @@ public class PlayerController : MonoBehaviour
         isDashing = false;
         animator.SetBool(isDash, false);
 
-        yield return new WaitForSeconds(dashCoolTime);
+        yield return new WaitForSeconds(PlayerStats.instance.dashCoolTime);
         
         canDash = true;
     }

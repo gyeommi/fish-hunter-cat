@@ -9,7 +9,7 @@ public class CannedTuna : MonoBehaviour
     float timer;
     float lifeTime = 3f;
 
-    int damage;
+    float damage;
 
     void Start()
     {
@@ -36,7 +36,7 @@ public class CannedTuna : MonoBehaviour
         rb.linearVelocity = transform.right * speed;
     }
 
-    public void SetDamage(int dmg)
+    public void SetDamage(float dmg)
     {
         damage = dmg;
     }
@@ -45,7 +45,6 @@ public class CannedTuna : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            //몬스터 데미지 입히기
             collision.gameObject.GetComponent<EnemyController>().TakeDamage(damage);
             ReturnPool();
         }

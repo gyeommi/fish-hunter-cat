@@ -3,14 +3,19 @@ using UnityEngine.InputSystem;
 
 public class CatClaw : PlayerWeapon
 {
+    [SerializeField] Animator playerAnimator;
     [SerializeField] Transform attackPoint;
     [SerializeField] float attackRadius = 1f;
     [SerializeField] LayerMask monsterLayer;
 
+    int attackHash;
+
     protected override void Start()
     {
         base.Start();
-        damage = 3;
+        damage = PlayerStats.instance.SetMeleeDamage();
+
+        attackHash = Animator.StringToHash("attack");
     }
 
     void Update()
@@ -32,6 +37,7 @@ public class CatClaw : PlayerWeapon
                 monster.GetComponent<EnemyController>()?.TakeDamage(damage);
             }
             //애니메이션 실행
+            playerAnimator.SetTrigger(attackHash);
         }
     }
 

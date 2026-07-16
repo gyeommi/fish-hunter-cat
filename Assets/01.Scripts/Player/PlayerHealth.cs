@@ -13,7 +13,7 @@ public class PlayerHealth : MonoBehaviour
 
         hpImg.fillAmount = 1f;
 
-        SetLife();
+        ResetLife();
     }
 
     public void SetHPGauge(float gauge)
@@ -21,12 +21,17 @@ public class PlayerHealth : MonoBehaviour
         hpImg.fillAmount = gauge;
     }
 
-    public void SetLife()
+    public void ResetLife()
     {
         for (int i = 0; i < lifeImg.Length; i++)
         {
             lifeImg[i].enabled = true;
         }
+    }
+
+    public void SetLife(int num)
+    {
+        lifeImg[num].enabled = true;
     }
 
     public void DecreaseLife(int index)
