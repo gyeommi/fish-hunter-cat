@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8581982686217164319}
   - component: {fileID: 2778426667463095501}
   m_Layer: 0
-  m_Name: Platformer Palette
+  m_Name: Stage1_Palette
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
