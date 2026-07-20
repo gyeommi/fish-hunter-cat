@@ -11,6 +11,8 @@ public class EnemyController : MonoBehaviour
     [SerializeField] float detectRange;
     [SerializeField] float attackRange;
 
+    [SerializeField] bool canFly;
+
     float moveSpeed;
     float attackCoolTime = 1f;
     float attackTimer;
@@ -117,7 +119,10 @@ public class EnemyController : MonoBehaviour
 
     void Move()
     {
-        transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
+        if (canFly)
+            transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
+        else
+            transform.position = Vector3.MoveTowards(transform.position, transform.position, moveSpeed * Time.deltaTime);
     }
 
     Vector2 GetDirection()

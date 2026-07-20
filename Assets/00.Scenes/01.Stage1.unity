@@ -323,6 +323,7 @@ MonoBehaviour:
   nowHP: 8
   detectRange: 15
   attackRange: 8
+  canFly: 1
 --- !u!50 &108811909
 Rigidbody2D:
   serializedVersion: 5
@@ -17252,6 +17253,7 @@ MonoBehaviour:
   nowHP: 8
   detectRange: 15
   attackRange: 8
+  canFly: 1
 --- !u!50 &1284663654
 Rigidbody2D:
   serializedVersion: 5
@@ -19673,6 +19675,7 @@ MonoBehaviour:
   nowHP: 8
   detectRange: 15
   attackRange: 8
+  canFly: 1
 --- !u!50 &1528567080
 Rigidbody2D:
   serializedVersion: 5
@@ -20236,6 +20239,7 @@ MonoBehaviour:
   nowHP: 8
   detectRange: 15
   attackRange: 8
+  canFly: 1
 --- !u!50 &1650099275
 Rigidbody2D:
   serializedVersion: 5
@@ -22746,6 +22750,7 @@ MonoBehaviour:
   nowHP: 8
   detectRange: 15
   attackRange: 8
+  canFly: 1
 --- !u!58 &2044364631
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -23115,6 +23120,7 @@ MonoBehaviour:
   nowHP: 8
   detectRange: 15
   attackRange: 8
+  canFly: 1
 --- !u!50 &2117362104
 Rigidbody2D:
   serializedVersion: 5
