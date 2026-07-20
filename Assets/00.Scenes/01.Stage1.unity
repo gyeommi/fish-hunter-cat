@@ -978,6 +978,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraMove
   target: {fileID: 1924310187}
+  zValue: 7.5
 --- !u!1 &225116681
 GameObject:
   m_ObjectHideFlags: 0
@@ -12463,6 +12464,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BackgroundMove
   target: {fileID: 1924310187}
+  backgroundWidth: 40
 --- !u!1 &580665758
 GameObject:
   m_ObjectHideFlags: 0

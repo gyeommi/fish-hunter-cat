@@ -6,7 +6,7 @@ public class BackgroundMove : MonoBehaviour
 
     private Transform[] backs;
 
-    private float backgroundWidth;
+    [SerializeField] float backgroundWidth;
     float totalWidth;
     float widthCount;
 
@@ -19,7 +19,6 @@ public class BackgroundMove : MonoBehaviour
         {
             backs[i] = transform.GetChild(i);
         }
-        backgroundWidth = 40f;
         totalWidth = backgroundWidth * backs.Length;
     }
 

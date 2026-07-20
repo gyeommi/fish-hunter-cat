@@ -3,6 +3,7 @@ using UnityEngine;
 public class CameraMove : MonoBehaviour
 {
     [SerializeField] Transform target;
+    [SerializeField] float zValue;
 
     private Vector3 velocity;
     private Vector3 targetPos;
@@ -16,7 +17,7 @@ public class CameraMove : MonoBehaviour
     {
         targetPos = new Vector3(target.position.x, target.position.y, transform.position.z);
         float x = Mathf.Clamp(targetPos.x, -2f, 142f);
-        float y = Mathf.Clamp(targetPos.y, 0f, 7.5f);
+        float y = Mathf.Clamp(targetPos.y, 0f, zValue);
 
         targetPos = new Vector3(x, y, transform.position.z);
 
