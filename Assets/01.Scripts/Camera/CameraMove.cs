@@ -8,6 +8,11 @@ public class CameraMove : MonoBehaviour
     private Vector3 velocity;
     private Vector3 targetPos;
 
+    private void Awake()
+    {
+        target = GameObject.FindWithTag("Player").transform;
+    }
+
     void Start()
     {
         velocity = Vector3.zero;

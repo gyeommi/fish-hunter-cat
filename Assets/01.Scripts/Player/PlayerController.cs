@@ -156,6 +156,11 @@ public class PlayerController : MonoBehaviour
     
     void Respawn()
     {
+        if (respawnPoint == null)
+        {
+            respawnPoint = GameObject.FindWithTag("Respawn").transform;
+        }
+
         transform.position = respawnPoint.position;
         StageManager.instance.ResetEnemy();
     }

@@ -62,5 +62,8 @@ public class UIManager : MonoBehaviour
         upgradePopup.SetActive(false);
 
         Time.timeScale = 1f;
+
+        foreach (UpgradeButton button in upgradeButtons)
+            button.GetComponent<Button>().interactable = true;
     }
 }

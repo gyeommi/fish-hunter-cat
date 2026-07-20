@@ -43,6 +43,12 @@ public abstract class PlayerWeapon : MonoBehaviour
 
     protected void LookMouse()
     {
+        if (camera == null)
+            camera = Camera.main;
+
+        if (camera == null)
+            return;
+
         Vector2 mousePos = Mouse.current.position.ReadValue();
 
         Vector3 worldPos = camera.ScreenToWorldPoint(mousePos);

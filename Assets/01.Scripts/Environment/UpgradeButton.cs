@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UpgradeButton : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class UpgradeButton : MonoBehaviour
     private void OnEnable()
     {
         Refresh();
+
+        //gameObject.GetComponent<Button>().interactable = true;
     }
 
     public void Refresh()

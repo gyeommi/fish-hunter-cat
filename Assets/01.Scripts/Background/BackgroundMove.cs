@@ -2,13 +2,19 @@ using UnityEngine;
 
 public class BackgroundMove : MonoBehaviour
 {
-    [SerializeField] Transform target;
+    private Transform target;
 
     private Transform[] backs;
 
     [SerializeField] float backgroundWidth;
     float totalWidth;
     float widthCount;
+
+    private void Awake()
+    {
+        if (target == null)
+            target = GameObject.FindWithTag("Player").transform;
+    }
 
     void Start()
     {

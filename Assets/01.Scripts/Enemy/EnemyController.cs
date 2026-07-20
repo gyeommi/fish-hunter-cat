@@ -24,6 +24,8 @@ public class EnemyController : MonoBehaviour
 
     Vector3 startPos;
 
+    Animator animator;
+
     private void OnEnable()
     {
         nowHP = maxHP;
@@ -44,6 +46,8 @@ public class EnemyController : MonoBehaviour
 
         stateMachine = new EnemyStateMachine(this);
         stateMachine.ChangeState(stateMachine.idleState);
+
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -144,9 +148,21 @@ public class EnemyController : MonoBehaviour
     
     void Die()
     {
+        stateMachine.ChangeState(stateMachine.deadState);
+    }
+
+    public void PlayDeadAnimation()
+    {
         idleTween?.Kill();
         idleTween = null;
 
+        enemyWeapon.CanAttack(false);
+
+        animator.SetTrigger("Dead");
+    }
+
+    public void DeadEnd()
+    {
         StageManager.instance.RemoveEnemy(gameObject, startPos);
     }
 }

@@ -1,31 +1,49 @@
 fileFormatVersion: 2
-guid: 4284229b6f88c8942ac27ee43205bd15
+guid: d2b9c31c592334c4cbfa882db6558b19
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1856142686028848259
-    second: drone idle_Sheet_0
+      213: -5066234058169660434
+    second: SpiderDeath_0
   - first:
-      213: -5431653201924554912
-    second: drone idle_Sheet_1
+      213: -192801846991626871
+    second: SpiderDeath_1
   - first:
-      213: -1018239599168931469
-    second: drone idle_Sheet_2
+      213: -6105552400522549161
+    second: SpiderDeath_2
   - first:
-      213: -3138098675055957681
-    second: drone idle_Sheet_3
+      213: 8748030355297343304
+    second: SpiderDeath_3
   - first:
-      213: -6447184721543015164
-    second: drone idle_Sheet_4
+      213: 4894587713622372253
+    second: SpiderDeath_4
   - first:
-      213: -6762926347482685118
-    second: drone idle_Sheet_5
+      213: -867776318004624479
+    second: SpiderDeath_5
   - first:
-      213: -1897862501095258857
-    second: drone idle_Sheet_6
+      213: 5255570486360512997
+    second: SpiderDeath_6
   - first:
-      213: -6599338345872842668
-    second: drone idle_Sheet_7
+      213: -7828343693380905653
+    second: SpiderDeath_7
+  - first:
+      213: -36212015995016855
+    second: SpiderDeath_8
+  - first:
+      213: 4550650674295028900
+    second: SpiderDeath_9
+  - first:
+      213: 8390176525950273270
+    second: SpiderDeath_10
+  - first:
+      213: 8154270946822387276
+    second: SpiderDeath_11
+  - first:
+      213: 623808756837875183
+    second: SpiderDeath_12
+  - first:
+      213: -4189222028863935782
+    second: SpiderDeath_13
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -147,13 +165,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: drone idle_Sheet_0
+      name: SpiderDeath_0
       rect:
         serializedVersion: 2
-        x: 6
-        y: 10
-        width: 21
-        height: 11
+        x: 0
+        y: 13
+        width: 545
+        height: 1523
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -162,20 +180,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 38c503d40f752c910800000000000000
-      internalID: 1856142686028848259
+      spriteID: eebcfc557fe11b9b0800000000000000
+      internalID: -5066234058169660434
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drone idle_Sheet_1
+      name: SpiderDeath_1
       rect:
         serializedVersion: 2
-        x: 38
-        y: 9
-        width: 21
-        height: 11
+        x: 1
+        y: 1068
+        width: 423
+        height: 360
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -184,20 +202,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 06f7c24e034ee94b0800000000000000
-      internalID: -5431653201924554912
+      spriteID: 98d560eddb7035df0800000000000000
+      internalID: -192801846991626871
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drone idle_Sheet_2
+      name: SpiderDeath_2
       rect:
         serializedVersion: 2
-        x: 70
-        y: 9
-        width: 21
-        height: 11
+        x: 227
+        y: 991
+        width: 797
+        height: 486
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -206,19 +224,85 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 379bc4bba7c7ed1f0800000000000000
-      internalID: -1018239599168931469
+      spriteID: 758e159b078b44ba0800000000000000
+      internalID: -6105552400522549161
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drone idle_Sheet_3
+      name: SpiderDeath_3
       rect:
         serializedVersion: 2
-        x: 102
-        y: 8
-        width: 21
+        x: 786
+        y: 1409
+        width: 10
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84715d3524f376970800000000000000
+      internalID: 8748030355297343304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpiderDeath_4
+      rect:
+        serializedVersion: 2
+        x: 583
+        y: 722
+        width: 373
+        height: 272
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9fe378c7911de340800000000000000
+      internalID: 4894587713622372253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpiderDeath_5
+      rect:
+        serializedVersion: 2
+        x: 795
+        y: 967
+        width: 14
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a386d4590a05f3f0800000000000000
+      internalID: -867776318004624479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpiderDeath_6
+      rect:
+        serializedVersion: 2
+        x: 838
+        y: 973
+        width: 11
         height: 12
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -228,20 +312,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f496a23a1eb3374d0800000000000000
-      internalID: -3138098675055957681
+      spriteID: 5e99b8b13898fe840800000000000000
+      internalID: 5255570486360512997
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drone idle_Sheet_4
+      name: SpiderDeath_7
       rect:
         serializedVersion: 2
-        x: 134
-        y: 6
-        width: 21
-        height: 13
+        x: 861
+        y: 960
+        width: 12
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -250,20 +334,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4055a1787aff686a0800000000000000
-      internalID: -6447184721543015164
+      spriteID: b459c5023e22c5390800000000000000
+      internalID: -7828343693380905653
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drone idle_Sheet_5
+      name: SpiderDeath_8
       rect:
         serializedVersion: 2
-        x: 166
-        y: 5
-        width: 21
-        height: 14
+        x: 5
+        y: 253
+        width: 412
+        height: 219
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -272,20 +356,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2412a2881524522a0800000000000000
-      internalID: -6762926347482685118
+      spriteID: 96924020d595f7ff0800000000000000
+      internalID: -36212015995016855
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drone idle_Sheet_6
+      name: SpiderDeath_9
       rect:
         serializedVersion: 2
-        x: 198
-        y: 3
-        width: 21
-        height: 18
+        x: 382
+        y: 248
+        width: 89
+        height: 81
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -294,20 +378,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 715cead4c1079a5e0800000000000000
-      internalID: -1897862501095258857
+      spriteID: 4ac3f3a8da8272f30800000000000000
+      internalID: 4550650674295028900
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drone idle_Sheet_7
+      name: SpiderDeath_10
       rect:
         serializedVersion: 2
-        x: 230
-        y: 1
-        width: 21
-        height: 21
+        x: 437
+        y: 321
+        width: 36
+        height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -316,8 +400,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 450a2ad3db07a64a0800000000000000
-      internalID: -6599338345872842668
+      spriteID: 6f64618e815ef6470800000000000000
+      internalID: 8390176525950273270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpiderDeath_11
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 259
+        width: 574
+        height: 284
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c46f2a3193ac92170800000000000000
+      internalID: 8154270946822387276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpiderDeath_12
+      rect:
+        serializedVersion: 2
+        x: 354
+        y: 9
+        width: 667
+        height: 274
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fed791f52c638a800800000000000000
+      internalID: 623808756837875183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpiderDeath_13
+      rect:
+        serializedVersion: 2
+        x: 714
+        y: 251
+        width: 47
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: adae25c92c4ecd5c0800000000000000
+      internalID: -4189222028863935782
       vertices: []
       indices: 
       edges: []
@@ -336,14 +486,20 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      drone idle_Sheet_0: 1856142686028848259
-      drone idle_Sheet_1: -5431653201924554912
-      drone idle_Sheet_2: -1018239599168931469
-      drone idle_Sheet_3: -3138098675055957681
-      drone idle_Sheet_4: -6447184721543015164
-      drone idle_Sheet_5: -6762926347482685118
-      drone idle_Sheet_6: -1897862501095258857
-      drone idle_Sheet_7: -6599338345872842668
+      SpiderDeath_0: -5066234058169660434
+      SpiderDeath_1: -192801846991626871
+      SpiderDeath_10: 8390176525950273270
+      SpiderDeath_11: 8154270946822387276
+      SpiderDeath_12: 623808756837875183
+      SpiderDeath_13: -4189222028863935782
+      SpiderDeath_2: -6105552400522549161
+      SpiderDeath_3: 8748030355297343304
+      SpiderDeath_4: 4894587713622372253
+      SpiderDeath_5: -867776318004624479
+      SpiderDeath_6: 5255570486360512997
+      SpiderDeath_7: -7828343693380905653
+      SpiderDeath_8: -36212015995016855
+      SpiderDeath_9: 4550650674295028900
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

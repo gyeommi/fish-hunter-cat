@@ -25,6 +25,9 @@ public class PlayerStats : MonoBehaviour
         else
             Destroy(gameObject);
         DontDestroyOnLoad(gameObject);
+
+        if (health == null)
+            health = gameObject.GetComponent<PlayerHealth>();
     }
 
     public void SetDashPower()
