@@ -1326,6 +1326,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2279d82576472e343902930719d8cb4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StageManager
+  originPlayerData: {fileID: 0}
+  playerData: {fileID: 0}
 --- !u!4 &300169660
 Transform:
   m_ObjectHideFlags: 0
@@ -1618,6 +1620,11 @@ MonoBehaviour:
   - {fileID: 1978944852}
   - {fileID: 583693297}
   upgradePopup: {fileID: 1132981163}
+  hpImg: {fileID: 1501266479}
+  lifeImg:
+  - {fileID: 2035121570}
+  - {fileID: 986764255}
+  - {fileID: 760861016}
 --- !u!1 &340633014
 GameObject:
   m_ObjectHideFlags: 0
@@ -21822,7 +21829,6 @@ GameObject:
   - component: {fileID: 1924310190}
   - component: {fileID: 1924310189}
   - component: {fileID: 1924310191}
-  - component: {fileID: 1924310192}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -21991,13 +21997,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 085b1b47518623c44a4c3cfe13c2fced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+  dir: 0
+  isGround: 0
+  isDashing: 0
+  animator: {fileID: 1924310190}
   groundLayer:
     serializedVersion: 2
     m_Bits: 448
-  nowHP: 20
-  nowLife: 3
-  health: {fileID: 1924310192}
   respawnPoint: {fileID: 918663643}
+  playerLight: {fileID: 910168022}
+  jumpPressed: 0
+  dashPressed: 0
+  meleeAttackPressed: 0
+  rangedAttackPressed: 0
 --- !u!95 &1924310190
 Animator:
   serializedVersion: 7
@@ -22032,33 +22044,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7f18e9fd52e1c645ba2e51ca6a901be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
+  playerData: {fileID: 11400000, guid: 5820b680aa4b02043a7c81ef0300dba2, type: 2}
   rangedDamage: 2
   meleeDamage: 4
   maxHP: 20
   nowHP: 20
   maxLife: 3
   nowLife: 3
+  speed: 3
   dashPower: 10
   dashCoolTime: 2
   isUnlockDash: 0
-  health: {fileID: 1924310192}
---- !u!114 &1924310192
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1924310184}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6705f80603883194284f127343aa19f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
-  hpImg: {fileID: 1501266479}
-  lifeImg:
-  - {fileID: 2035121570}
-  - {fileID: 986764255}
-  - {fileID: 760861016}
+  jumpPower: 7
+  jumpCount: 0
+  jumpCountMax: 2
 --- !u!1001 &1955122824
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -29,4 +29,9 @@ public class EnemyIdleState : EnemyBaseState
 
         enemy.Idle();
     }
+
+    public override void FixedUpdate()
+    {
+        base.FixedUpdate();
+    }
 }

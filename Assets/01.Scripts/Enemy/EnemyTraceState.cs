@@ -39,4 +39,9 @@ public class EnemyTraceState : EnemyBaseState
 
         enemy.Trace();
     }
+
+    public override void FixedUpdate()
+    {
+        base.FixedUpdate();
+    }
 }

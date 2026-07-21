@@ -10,7 +10,7 @@ public class EnemyDeadState : EnemyBaseState
     {
         base.Enter();
         //애니메이션 실행
-        enemy.PlayDeadAnimation();
+        enemy.PlayDeadAnim();
     }
 
     public override void Exit()

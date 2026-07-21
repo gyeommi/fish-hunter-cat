@@ -156,7 +156,7 @@ public class EnemyController : MonoBehaviour
         stateMachine.ChangeState(stateMachine.deadState);
     }
 
-    public void PlayDeadAnimation()
+    public void PlayDeadAnim()
     {
         idleTween?.Kill();
         idleTween = null;

@@ -12,6 +12,9 @@ public class StageManager : MonoBehaviour
     Dictionary<GameObject, Vector3> allEnemies;
     Dictionary<GameObject, Vector3> deadEnemies;
 
+    [SerializeField] PlayerData originPlayerData;
+    [SerializeField] PlayerData playerData;
+
     private void Awake()
     {
         if (instance == null)
@@ -28,21 +31,48 @@ public class StageManager : MonoBehaviour
         deadEnemies = new Dictionary<GameObject, Vector3>();
     }
 
+    public void ResetPlayerData()
+    {
+        playerData.rangedDamage = originPlayerData.rangedDamage;
+        playerData.meleeDamage = originPlayerData.meleeDamage;
+
+        playerData.maxHP = originPlayerData.maxHP;
+        playerData.nowHP = originPlayerData.nowHP;
+
+        playerData.maxLife = originPlayerData.maxLife;
+        playerData.nowLife = originPlayerData.nowLife;
+
+        playerData.speed = originPlayerData.speed;
+
+        playerData.dashPower = originPlayerData.dashPower;
+        playerData.dashCoolTime = originPlayerData.dashCoolTime;
+        playerData.isUnlockDash = originPlayerData.isUnlockDash;
+
+        playerData.jumpPower = originPlayerData.jumpPower;
+        playerData.jumpCount = originPlayerData.jumpCount;
+        playerData.jumpCountMax = originPlayerData.jumpCountMax;
+    }
+
     public void GameStart()
     {
+        ResetPlayerData();
+
         currentStage++;
         SceneManager.LoadScene(currentStage);
     }
 
     public void NextStage()
     {
+        enemies.Clear();
+        deadEnemies.Clear();
+
         currentStage++;
         SceneManager.LoadScene(currentStage);
     }
 
     public void GameOver()
     {
-        SceneManager.LoadScene("GameOver");
+        //SceneManager.LoadScene("GameOver");
     }
 
     public void RetryStage()

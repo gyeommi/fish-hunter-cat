@@ -25,4 +25,9 @@ public class EnemyBaseState : IState
     {
         //이 상태에서 할 행동
     }
+
+    public virtual void FixedUpdate()
+    {
+
+    }
 }

@@ -13,13 +13,13 @@ public class UpgradeButton : MonoBehaviour
     private void OnEnable()
     {
         Refresh();
-
-        //gameObject.GetComponent<Button>().interactable = true;
     }
 
     public void Refresh()
     {
         text.text = UpgradeManager.instance.GetUpgradeText(type);
+
+        gameObject.GetComponent<Button>().interactable = true;
     }
 
     public void OnClick()

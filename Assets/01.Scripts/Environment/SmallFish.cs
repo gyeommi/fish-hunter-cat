@@ -6,6 +6,7 @@ public class SmallFish : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
+            PlayerStats.instance.SaveData();
             StageManager.instance.NextStage();
             gameObject.SetActive(false);
         }

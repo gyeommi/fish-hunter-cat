@@ -39,4 +39,9 @@ public class EnemyAttackState : EnemyBaseState
 
         enemy.Attack();
     }
+
+    public override void FixedUpdate()
+    {
+        base.FixedUpdate();
+    }
 }

@@ -13,6 +13,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] UpgradeButton[] upgradeButtons;
     [SerializeField] GameObject upgradePopup;
 
+    [SerializeField] Image hpImg;
+    [SerializeField] Image[] lifeImg;
+
     private void Awake()
     {
         if (instance == null)
@@ -25,6 +28,17 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         RefreshUpgradeUI();
+        RefreshHPUI();
+    }
+
+    public void RefreshHPUI()
+    {
+        hpImg.fillAmount = PlayerStats.instance.nowHP / PlayerStats.instance.maxHP;
+
+        for (int i = 0; i < lifeImg.Length; i++)
+        {
+            lifeImg[i].enabled = i < PlayerStats.instance.nowLife;
+        }
     }
 
     public void SetGemText()

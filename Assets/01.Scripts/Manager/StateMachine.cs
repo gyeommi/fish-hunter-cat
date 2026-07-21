@@ -6,6 +6,8 @@ public interface IState
     public void Exit();
     public void Update();
 
+    public void FixedUpdate();
+
 }
 
 public class StateMachine
@@ -19,4 +21,6 @@ public class StateMachine
         currentState?.Enter();
     }
     public void Update() => currentState?.Update();
+
+    public void FixedUpdate() => currentState?.FixedUpdate();
 }

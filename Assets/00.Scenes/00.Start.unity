@@ -1366,6 +1366,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2279d82576472e343902930719d8cb4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneChanger
+  originPlayerData: {fileID: 11400000, guid: 8111dad8d6baa4e4bb097dbbff288ab0, type: 2}
+  playerData: {fileID: 11400000, guid: 5820b680aa4b02043a7c81ef0300dba2, type: 2}
 --- !u!4 &2111893531
 Transform:
   m_ObjectHideFlags: 0
