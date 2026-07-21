@@ -70,9 +70,19 @@ public class StageManager : MonoBehaviour
         SceneManager.LoadScene(currentStage);
     }
 
+    public void GameMain()
+    {
+        SceneManager.LoadScene("00.Start");
+    }
+
     public void GameOver()
     {
-        //SceneManager.LoadScene("GameOver");
+        SceneManager.LoadScene("05.GameOver");
+    }
+
+    public void GameEnd()
+    {
+        SceneManager.LoadScene("06.End");
     }
 
     public void RetryStage()
