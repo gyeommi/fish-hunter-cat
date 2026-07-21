@@ -3,20 +3,27 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour
 {
     public static PlayerStats instance;
+    
+    [SerializeField] PlayerData playerData;
 
-    public float rangedDamage = 2;
-    public float meleeDamage = 4;
-    public float maxHP = 20;
-    public float nowHP = 20;
-    public int maxLife = 3;
-    public int nowLife = 3;
+    public float rangedDamage;
+    public float meleeDamage;
+    
+    public float maxHP;
+    public float nowHP;
+    
+    public int maxLife;
+    public int nowLife;
 
-    public float dashPower = 11f;
-    public float dashCoolTime = 1.4f;
-
+    public float speed;
+    
+    public float dashPower;
+    public float dashCoolTime;
     public bool isUnlockDash;
 
-    [SerializeField] PlayerHealth health;
+    public float jumpPower;
+    public int jumpCount;
+    public int jumpCountMax;
 
     private void Awake()
     {
@@ -26,8 +33,29 @@ public class PlayerStats : MonoBehaviour
             Destroy(gameObject);
         DontDestroyOnLoad(gameObject);
 
-        if (health == null)
-            health = gameObject.GetComponent<PlayerHealth>();
+        LoadData();
+    }
+
+    public void LoadData()
+    {
+        rangedDamage = playerData.rangedDamage;
+        meleeDamage = playerData.meleeDamage;
+
+        maxHP = playerData.maxHP;
+        nowHP = playerData.nowHP;
+
+        maxLife = playerData.maxLife;
+        nowLife = playerData.nowLife;
+        
+        speed = playerData.speed;
+
+        dashPower = playerData.dashPower;
+        dashCoolTime = playerData.dashCoolTime;
+        isUnlockDash = playerData.isUnlockDash;
+
+        jumpPower = playerData.jumpPower;
+        jumpCount = playerData.jumpCount;
+        jumpCountMax = playerData.jumpCountMax;
     }
 
     public void SetDashPower()
@@ -65,18 +93,42 @@ public class PlayerStats : MonoBehaviour
         if (nowHP == maxHP)
         {
             nowLife++;
-            health.SetLife(nowLife);
         }
         nowHP = maxHP;
+        UIManager.instance.RefreshHPUI();
     }
 
     public void DecreaseNowHP(float value)
     {
-        nowHP -= value;
+        nowHP = Mathf.Clamp(nowHP - value, 0, maxHP);
     }
 
     public void UnlockDash()
     {
         isUnlockDash = true;
+        Debug.Log("Unlock : " + isUnlockDash);
+    }
+
+    public void SaveData()
+    {
+        playerData.rangedDamage = rangedDamage;
+        playerData.meleeDamage = meleeDamage;
+
+        playerData.maxHP = maxHP;
+        playerData.nowHP = nowHP;
+
+        playerData.maxLife = maxLife;
+        playerData.nowLife = nowLife;
+
+        playerData.speed = speed;
+
+        playerData.dashPower = dashPower;
+        playerData.dashCoolTime = dashCoolTime;
+        playerData.isUnlockDash = isUnlockDash;
+
+        playerData.jumpPower = jumpPower;
+        playerData.jumpCountMax = jumpCountMax;
+
+        Debug.Log("Save : " + playerData.isUnlockDash);
     }
 }

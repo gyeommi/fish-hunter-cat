@@ -16,12 +16,11 @@ public class CannedTunaWeapon : PlayerWeapon
     private void Update()
     {
         LookMouse();
-        Attack();
     }
 
-    protected override void Attack()
+    public override void Attack()
     {
-        if (Mouse.current.rightButton.wasPressedThisFrame && canAttack)
+        if (canAttack)
         {
             GameObject tuna = ObjectPoolManager.instance.GetObject("CannedTuna");
 

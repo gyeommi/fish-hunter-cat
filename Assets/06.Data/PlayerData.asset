@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20ab55320fb62c4ba030267b7b423c6, type: 3}
+  m_Name: PlayerData
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerData
+  rangedDamage: 2
+  meleeDamage: 4
+  maxHP: 20
+  nowHP: 20
+  maxLife: 3
+  nowLife: 3
+  speed: 3
+  dashPower: 11
+  dashCoolTime: 1.4
+  isUnlockDash: 0
+  jumpPower: 7
+  jumpCount: 0
+  jumpCountMax: 2

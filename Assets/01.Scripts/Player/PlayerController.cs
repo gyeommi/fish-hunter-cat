@@ -1,73 +1,62 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.Rendering.DebugUI;
 
 public class PlayerController : MonoBehaviour
 {
+    PlayerStateMachine stateMachine;
+
+    CatClaw catClaw;
+    CannedTunaWeapon cannedTunaW;
+
     private Rigidbody2D rb;
-    
     private SpriteRenderer sr;
 
-    float speed = 3f;
-    float jumpPower = 7f;
+    public float dir;
+    public bool isGround;
 
-    float dir;
-    bool isGround;
-    int jumpCount;
-    int jumpCountMax;
+    private bool canDash = true;
+    public bool isDashing = false;
 
-    float dashPower;
-    float dashCoolTime;
-    bool canDash;
-    bool isDashing;
-
-    Animator animator;
+    public Animator animator;
 
     int isMove;
     int isJump;
     int isDash;
     int damageHash;
+    int attackHash;
 
     [SerializeField] LayerMask groundLayer;
 
-    [SerializeField] float nowHP;
-    [SerializeField] int nowLife;
-    float maxHP;
-    int maxLife;
-
-    [SerializeField] PlayerHealth health;
-
     [SerializeField] Transform respawnPoint;
+    [SerializeField] GameObject playerLight;
 
-    private void OnEnable()
-    {
-        nowHP = 20;
-        maxHP = 20;
-        nowLife = 3;
-        maxLife = 3;
-    }
+    public bool jumpPressed;
+    public bool dashPressed;
+    public bool meleeAttackPressed;
+    public bool rangedAttackPressed;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
+
+        catClaw = GetComponentInChildren<CatClaw>();
+        cannedTunaW = GetComponentInChildren<CannedTunaWeapon>();
+
+        stateMachine = new PlayerStateMachine(this);
+        stateMachine.ChangeState(stateMachine.idleState);
     }
 
     private void Start()
     {
-        dashPower = 15f;
-        dashCoolTime = 1f;
-        canDash = true;
-        isDashing = false;
-
-        jumpCount = 0;
-        jumpCountMax = 2;
-
         animator = GetComponent<Animator>();
         isMove = Animator.StringToHash("isMove");
         isJump = Animator.StringToHash("isJump");
         isDash = Animator.StringToHash("isDash");
         damageHash = Animator.StringToHash("damage");
+        attackHash = Animator.StringToHash("attack");
     }
 
     private void Update()
@@ -78,35 +67,22 @@ public class PlayerController : MonoBehaviour
         if (Keyboard.current.dKey.isPressed)
             dir += 1;
 
+        jumpPressed = Keyboard.current.spaceKey.wasPressedThisFrame;
+        dashPressed = Keyboard.current.leftShiftKey.wasPressedThisFrame;
+        meleeAttackPressed = Mouse.current.leftButton.wasPressedThisFrame;
+        rangedAttackPressed = Mouse.current.rightButton.wasPressedThisFrame;
+
         GroundCheck();
-
-        if (Keyboard.current.spaceKey.wasPressedThisFrame)
-        {
-            Jump();
-        }
-
-        if (Keyboard.current.leftShiftKey.wasPressedThisFrame)
-        {
-            Dash();
-        }
-
-        if (dir == 0)
-        {
-            animator.SetBool(isMove, false);
-        }
-        else
-        {
-            animator.SetBool(isMove, true);
-        }
-
-        animator.SetBool(isJump, !isGround);
+        stateMachine.Update();
     }
 
-    private void FixedUpdate()
+    public void EnableLight()
     {
-        if (isDashing)
-            return;
+        playerLight.SetActive(true);
+    }
 
+    public void Move()
+    {
         if (dir != 0)
         {
             if (dir > 0)
@@ -114,42 +90,50 @@ public class PlayerController : MonoBehaviour
             else
                 sr.flipX = true;
         }
-        rb.linearVelocity = new Vector2(dir * speed, rb.linearVelocity.y);
+        //rb.linearVelocity = new Vector2(dir * PlayerStats.instance.speed, rb.linearVelocity.y);
+        float targetSpeed = dir * PlayerStats.instance.speed;
+
+        rb.linearVelocity = new Vector2(Mathf.MoveTowards(rb.linearVelocity.x, targetSpeed, 20 * Time.fixedDeltaTime), rb.linearVelocity.y);
+    }
+
+    private void FixedUpdate()
+    {
+        stateMachine.FixedUpdate();
+    }
+
+    public void MeleeAttack()
+    {
+        catClaw.Attack();
+    }
+
+    public void RangedAttack()
+    {
+        cannedTunaW.Attack();
     }
 
     public void TakeDamage(float damage)
     {
-        nowHP -= damage;
+        PlayerStats.instance.DecreaseNowHP(damage);
         animator.SetTrigger(damageHash);
-        health.SetHPGauge(nowHP / maxHP);
-        if (nowHP <= 0)
+        UIManager.instance.RefreshHPUI();
+        if (PlayerStats.instance.nowHP <= 0)
         {
-            nowHP = 0;
+            PlayerStats.instance.nowHP = 0;
             Die();
         }
     }
 
-    public void ResetPlayer()
-    {
-        nowHP = maxHP;
-        nowLife = maxLife;
-        health.ResetLife();
-        health.SetHPGauge(nowHP / maxHP);
-        transform.position = new Vector3(0, 0, 0);
-    }
-
     public void Die()
     {
-        if (nowLife <= 0)
+        if (PlayerStats.instance.nowLife <= 0)
         {
             StageManager.instance.GameOver();
-            nowLife = 0;
+            PlayerStats.instance.nowLife = 0;
+            return;
         }
-        nowLife--;
-        health.DecreaseLife(nowLife);
-        
-        nowHP = maxHP;
-        health.SetHPGauge(nowHP / maxHP);
+        PlayerStats.instance.nowLife--;
+        PlayerStats.instance.nowHP = PlayerStats.instance.maxHP;
+        UIManager.instance.RefreshHPUI();
 
         Respawn();
     }
@@ -172,24 +156,26 @@ public class PlayerController : MonoBehaviour
         isGround = hit.collider == null ? false : true;
 
         if (isGround)
-            jumpCount = 0;
+            PlayerStats.instance.jumpCount = 0;
     }
 
-    private void Jump()
+    public void Jump()
     {
-        if (jumpCount >= jumpCountMax)
+        if (PlayerStats.instance.jumpCount >= PlayerStats.instance.jumpCountMax)
             return;
 
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, PlayerStats.instance.jumpPower);
 
         if (isGround)
-            jumpCount++;
+            PlayerStats.instance.jumpCount++;
         else
-            jumpCount += 2;
+            PlayerStats.instance.jumpCount += 2;
     }
 
-    private void Dash()
+    public void Dash()
     {
+        Debug.Log("dash");
+
         if (!PlayerStats.instance.isUnlockDash)
             return;
 
@@ -203,8 +189,6 @@ public class PlayerController : MonoBehaviour
 
         rb.linearVelocity = new Vector2(direction * PlayerStats.instance.dashPower, 0);
 
-        animator.SetBool(isDash, true);
-
         StartCoroutine(DashCoolTime());
     }
 
@@ -213,10 +197,29 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
 
         isDashing = false;
-        animator.SetBool(isDash, false);
 
         yield return new WaitForSeconds(PlayerStats.instance.dashCoolTime);
         
         canDash = true;
+    }
+
+    public void PlayMoveAnim(bool value)
+    {
+        animator.SetBool(isMove, value);
+    }
+
+    public void PlayDashAnim(bool value)
+    {
+        animator.SetBool(isDash, value);
+    }
+
+    public void PlayJumpAnim(bool value)
+    {
+        animator.SetBool(isJump, value);
+    }
+
+    public void PlayMeleeAttackAnim()
+    {
+        animator.SetTrigger(attackHash);
     }
 }

@@ -39,7 +39,7 @@ public abstract class PlayerWeapon : MonoBehaviour
         camera = Camera.main;
     }
 
-    protected abstract void Attack();
+    public abstract void Attack();
 
     protected void LookMouse()
     {

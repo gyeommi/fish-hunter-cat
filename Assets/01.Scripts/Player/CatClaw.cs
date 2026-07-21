@@ -21,12 +21,11 @@ public class CatClaw : PlayerWeapon
     void Update()
     {
         LookMouse();
-        Attack();
     }
 
-    protected override void Attack()
+    public override void Attack()
     {
-        if (Mouse.current.leftButton.wasPressedThisFrame && canAttack)
+        if (canAttack)
         {
             canAttack = false;
 

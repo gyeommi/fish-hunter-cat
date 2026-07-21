@@ -11,9 +11,7 @@ public class PlayerHealth : MonoBehaviour
         if (hpImg == null)
             hpImg = GetComponent<Image>();
 
-        hpImg.fillAmount = 1f;
-
-        ResetLife();
+        RefreshUI();
     }
 
     public void SetHPGauge(float gauge)
@@ -21,8 +19,10 @@ public class PlayerHealth : MonoBehaviour
         hpImg.fillAmount = gauge;
     }
 
-    public void ResetLife()
+    public void RefreshUI()
     {
+        hpImg.fillAmount = PlayerStats.instance.nowHP / PlayerStats.instance.maxHP;
+
         for (int i = 0; i < lifeImg.Length; i++)
         {
             lifeImg[i].enabled = true;
