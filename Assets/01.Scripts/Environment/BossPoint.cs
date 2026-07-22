@@ -1,8 +1,10 @@
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class BossPoint : MonoBehaviour
 {
     [SerializeField] Transform respawnPoint;
+    [SerializeField] Light2D light;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -10,6 +12,11 @@ public class BossPoint : MonoBehaviour
         {
             collision.gameObject.GetComponent<PlayerController>().SetRespawnPoint(respawnPoint);
             StageManager.instance.DestroyEnemy();
+
+            Color color;
+            if (ColorUtility.TryParseHtmlString("#5E1A1B", out color))
+                light.color = color;
+
             gameObject.SetActive(false);
         }
     }
