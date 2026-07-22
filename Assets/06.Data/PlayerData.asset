@@ -22,6 +22,6 @@ MonoBehaviour:
   dashPower: 11
   dashCoolTime: 1.4
   isUnlockDash: 0
-  jumpPower: 7
+  jumpPower: 8.5
   jumpCount: 0
   jumpCountMax: 2

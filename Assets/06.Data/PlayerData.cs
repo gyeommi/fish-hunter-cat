@@ -24,7 +24,7 @@ public class PlayerData : ScriptableObject
     public bool isUnlockDash;
 
     [Header("Jump")]
-    public float jumpPower = 7f;
+    public float jumpPower = 8.5f;
     public int jumpCount = 0;
     public int jumpCountMax = 2;
 }
