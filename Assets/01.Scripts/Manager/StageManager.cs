@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -127,6 +128,17 @@ public class StageManager : MonoBehaviour
             enemy.Key.transform.position = enemy.Value;
             enemy.Key.SetActive(true);
         }
+        deadEnemies.Clear();
+    }
+
+    public void DestroyEnemy()
+    {
+        foreach (EnemyController enemy in enemies)
+        {
+            if (enemy != null)
+                Destroy(enemy.gameObject);
+        }
+        enemies.Clear();
         deadEnemies.Clear();
     }
 }

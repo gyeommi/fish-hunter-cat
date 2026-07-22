@@ -149,6 +149,11 @@ public class PlayerController : MonoBehaviour
         StageManager.instance.ResetEnemy();
     }
 
+    public void SetRespawnPoint(Transform point)
+    {
+        respawnPoint = point;
+    }
+
     private void GroundCheck()
     {
         RaycastHit2D hit = Physics2D.CircleCast(transform.position, 0.3f, Vector2.down, 0.8f, groundLayer);
