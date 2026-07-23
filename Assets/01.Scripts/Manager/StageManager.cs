@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -60,6 +59,8 @@ public class StageManager : MonoBehaviour
 
         currentStage++;
         SceneManager.LoadScene(currentStage);
+
+        SoundManager.instance.PlayBGM((BGMType)currentStage);
     }
 
     public void NextStage()
@@ -69,6 +70,8 @@ public class StageManager : MonoBehaviour
 
         currentStage++;
         SceneManager.LoadScene(currentStage);
+
+        SoundManager.instance.PlayBGM((BGMType)currentStage);
     }
 
     public void GameMain()

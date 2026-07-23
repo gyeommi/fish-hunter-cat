@@ -24,6 +24,8 @@ public class UpgradeButton : MonoBehaviour
 
     public void OnClick()
     {
+        SoundManager.instance.PlaySFX(SFXType.UIClick);
+
         text.text += "\n 선택 완료";
 
         UpgradeManager.instance.SetUpgradeStat(type);

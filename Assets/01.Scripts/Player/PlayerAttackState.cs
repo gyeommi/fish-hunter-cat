@@ -11,7 +11,9 @@ public class PlayerAttackState : PlayerBaseState
         base.Enter();
         //애니메이션 실행
         if (player.meleeAttackPressed)
+        {
             player.PlayMeleeAttackAnim();
+        }
     }
 
     public override void Exit()

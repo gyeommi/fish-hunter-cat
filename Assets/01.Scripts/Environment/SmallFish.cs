@@ -6,6 +6,8 @@ public class SmallFish : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
+            SoundManager.instance.PlaySFX(SFXType.SmallFish);
+
             PlayerStats.instance.SaveData();
             StageManager.instance.NextStage();
             gameObject.SetActive(false);

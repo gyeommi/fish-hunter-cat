@@ -34,6 +34,8 @@ public class EnemyRangedWeapon : EnemyWeapon
         GameObject bullet = ObjectPoolManager.instance.GetObject("Bullet");
         bullet.transform.position = transform.position;
 
+        SoundManager.instance.PlaySFX(SFXType.Gun);
+
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         bullet.GetComponent<Bullet>().SetDirection(dir);
         bullet.GetComponent<Bullet>().SetDamage(damage);
@@ -48,6 +50,8 @@ public class EnemyRangedWeapon : EnemyWeapon
     {
         GameObject shot = ObjectPoolManager.instance.GetObject("Shot");
         shot.transform.position = transform.position;
+
+        SoundManager.instance.PlaySFX(SFXType.Gun);
 
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         shot.GetComponent<Shot>().SetDirection(dir);

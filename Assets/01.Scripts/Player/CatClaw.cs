@@ -27,6 +27,8 @@ public class CatClaw : PlayerWeapon
     {
         if (canAttack)
         {
+            SoundManager.instance.PlaySFX(SFXType.Claw);
+
             canAttack = false;
 
             BossController boss = FindFirstObjectByType<BossController>();
@@ -44,7 +46,6 @@ public class CatClaw : PlayerWeapon
                     enemy.GetComponent<EnemyController>()?.TakeDamage(damage);
                 }
             }
-            //애니메이션 실행
             playerAnimator.SetTrigger(attackHash);
         }
     }

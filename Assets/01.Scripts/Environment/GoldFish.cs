@@ -6,6 +6,8 @@ public class GoldFish : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
+            SoundManager.instance.PlaySFX(SFXType.GoldFish);
+
             PlayerStats.instance.SaveData();
             StageManager.instance.GameEnd();
             gameObject.SetActive(false);

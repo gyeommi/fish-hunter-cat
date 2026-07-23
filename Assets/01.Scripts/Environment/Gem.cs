@@ -6,6 +6,8 @@ public class Gem : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
+            SoundManager.instance.PlaySFX(SFXType.SmallFish);
+
             UIManager.instance.SetGemText();
             gameObject.SetActive(false);
         }

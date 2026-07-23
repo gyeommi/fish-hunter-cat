@@ -8,6 +8,8 @@ public class JumpPlatform : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
+            SoundManager.instance.PlaySFX(SFXType.Jump);
+
             foreach (ContactPoint2D contact in collision.contacts)
             {
                 if (contact.normal.y < -0.9f)

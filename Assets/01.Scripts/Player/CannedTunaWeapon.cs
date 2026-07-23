@@ -22,6 +22,8 @@ public class CannedTunaWeapon : PlayerWeapon
     {
         if (canAttack)
         {
+            SoundManager.instance.PlaySFX(SFXType.CannedTuna);
+
             GameObject tuna = ObjectPoolManager.instance.GetObject("CannedTuna");
 
             tuna.transform.position = firePosition.position;
