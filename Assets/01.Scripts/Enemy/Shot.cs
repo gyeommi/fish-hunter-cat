@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class Shot : MonoBehaviour
 {
     [SerializeField] float speed = 1f;
 
@@ -25,7 +25,7 @@ public class Bullet : MonoBehaviour
 
     private void OnDisable()
     {
-        //ReturnPool();
+        ReturnPool();
     }
 
     void Update()
@@ -71,7 +71,7 @@ public class Bullet : MonoBehaviour
 
     void ReturnPool()
     {
-        ObjectPoolManager.instance.ReturnObject("Bullet", this.gameObject);
+        ObjectPoolManager.instance.ReturnObject("Shot", this.gameObject);
         transform.rotation = Quaternion.identity;
     }
 }

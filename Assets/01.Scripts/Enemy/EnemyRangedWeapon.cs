@@ -19,7 +19,12 @@ public class EnemyRangedWeapon : EnemyWeapon
         while (true)
         {
             yield return new WaitUntil(() => canAttack);
-            Attack();
+
+            if (isBetterAttack)
+                BetterAttack();
+            else
+                Attack();
+
             yield return wait;
         }
     }
@@ -37,5 +42,15 @@ public class EnemyRangedWeapon : EnemyWeapon
     private void OnDisable()
     {
         StopAllCoroutines();
+    }
+
+    protected override void BetterAttack()
+    {
+        GameObject shot = ObjectPoolManager.instance.GetObject("Shot");
+        shot.transform.position = transform.position;
+
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        shot.GetComponent<Shot>().SetDirection(dir);
+        shot.GetComponent<Shot>().SetDamage(damage * 4);
     }
 }

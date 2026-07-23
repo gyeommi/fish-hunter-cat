@@ -5,6 +5,7 @@ public abstract class EnemyWeapon : MonoBehaviour
     [SerializeField] protected int damage;
     [SerializeField] protected int range;
     [SerializeField] protected int delay;
+    [SerializeField] protected bool isBetterAttack;
 
     protected float distance;
     protected Vector2 dir;
@@ -20,10 +21,17 @@ public abstract class EnemyWeapon : MonoBehaviour
         dir = direction;
     }
 
+    public void SetAttackType(bool isBetter)
+    {
+        isBetterAttack = isBetter;
+    }
+
     public void CanAttack(bool canAtt)
     {
         canAttack = canAtt;
     }
 
     protected abstract void Attack();
+
+    protected abstract void BetterAttack();
 }

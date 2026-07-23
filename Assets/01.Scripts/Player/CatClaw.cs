@@ -5,7 +5,7 @@ public class CatClaw : PlayerWeapon
 {
     [SerializeField] Animator playerAnimator;
     [SerializeField] Transform attackPoint;
-    [SerializeField] float attackRadius = 1f;
+    [SerializeField] float attackRadius = 0.1f;
     [SerializeField] LayerMask monsterLayer;
 
     int attackHash;
@@ -29,11 +29,20 @@ public class CatClaw : PlayerWeapon
         {
             canAttack = false;
 
-            Collider2D[] monsters = Physics2D.OverlapCircleAll(attackPoint.position, attackRadius, monsterLayer);
+            BossController boss = FindFirstObjectByType<BossController>();
 
-            foreach (Collider2D monster in monsters)
+            if (boss != null && boss.gameObject.activeInHierarchy)
             {
-                monster.GetComponent<EnemyController>()?.TakeDamage(damage);
+                boss.GetComponent<BossController>()?.TakeDamage(damage);
+            }
+            else
+            {
+                Collider2D[] enemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRadius, monsterLayer);
+
+                foreach (Collider2D enemy in enemies)
+                {
+                    enemy.GetComponent<EnemyController>()?.TakeDamage(damage);
+                }
             }
             //애니메이션 실행
             playerAnimator.SetTrigger(attackHash);

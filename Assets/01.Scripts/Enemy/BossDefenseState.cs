@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class EnemyAttackState : EnemyBaseState
+public class BossDefenseState : BossBaseState
 {
-    public EnemyAttackState(EnemyController enemy, EnemyStateMachine stateMachine) : base(enemy, stateMachine)
+    public BossDefenseState(BossController boss, BossStateMachine stateMachine) : base(boss, stateMachine)
     {
     }
 
@@ -10,6 +10,7 @@ public class EnemyAttackState : EnemyBaseState
     {
         base.Enter();
         //애니메이션 실행
+        boss.PlayDefenseAnim();
     }
 
     public override void Exit()
@@ -21,22 +22,25 @@ public class EnemyAttackState : EnemyBaseState
     public override void Update()
     {
         base.Update();
-        //감지 범위 내에 플레이어가 있는지 검사
-        //없으면 Idle 상태로 변경
-        //있으면 거리를 조금 좁혀서 Attack 상태로 변경
 
-        if (!enemy.IsDetectPlayer())
+        if (!boss.IsDetectPlayer())
         {
             stateMachine.ChangeState(stateMachine.idleState);
             return;
         }
 
-        if (!enemy.IsAttackRange())
+        if (!boss.IsAttackRange())
         {
             stateMachine.ChangeState(stateMachine.traceState);
             return;
         }
-        enemy.Attack();
+
+        if (boss.IsAttackRange())
+        {
+            stateMachine.ChangeState(stateMachine.attackState);
+        }
+
+        boss.Defense();
     }
 
     public override void FixedUpdate()

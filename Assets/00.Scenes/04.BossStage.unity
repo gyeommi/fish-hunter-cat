@@ -3333,7 +3333,7 @@ Transform:
   m_GameObject: {fileID: 519148036}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 62.04, y: -7, z: 0}
+  m_LocalPosition: {x: 64.74, y: -7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4037,6 +4037,7 @@ MonoBehaviour:
   damage: 3
   range: 7
   delay: 2
+  isBetterAttack: 0
 --- !u!114 &654000305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4723,13 +4724,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 5294410421049644812, guid: 8821e8c72dd0ab94c94af66a1561a8f3, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 0
+  m_FillOrigin: 1
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &760369465
@@ -5438,6 +5439,7 @@ MonoBehaviour:
   damage: 3
   range: 4
   delay: 2
+  isBetterAttack: 0
 --- !u!114 &899813375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5651,6 +5653,7 @@ MonoBehaviour:
   damage: 3
   range: 4
   delay: 2
+  isBetterAttack: 0
 --- !u!114 &900859098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6656,6 +6659,7 @@ MonoBehaviour:
   damage: 3
   range: 7
   delay: 2
+  isBetterAttack: 0
 --- !u!114 &1106783512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9962,14 +9966,18 @@ GameObject:
   m_Component:
   - component: {fileID: 1243109393}
   - component: {fileID: 1243109392}
+  - component: {fileID: 1243109398}
+  - component: {fileID: 1243109396}
+  - component: {fileID: 1243109395}
+  - component: {fileID: 1243109397}
   - component: {fileID: 1243109394}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Boss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1243109392
 SpriteRenderer:
   serializedVersion: 2
@@ -10038,7 +10046,7 @@ Transform:
   m_GameObject: {fileID: 1243109391}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 100.2, y: -5.83, z: 0}
+  m_LocalPosition: {x: 97.77, y: -5.83, z: 0}
   m_LocalScale: {x: 6.5, y: 6.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10066,6 +10074,106 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1243109395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1243109391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1e1f50a0f43e3244a3c6b8ec73ebdfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BossController
+  maxHP: 100
+  nowHP: 100
+  detectRange: 20
+  defenseRange: 5
+  attackRange: 8
+  bossHPCanvas: {fileID: 1221383567}
+  goldFish: {fileID: 421504185}
+  isDefense: 0
+  attackCount: 0
+--- !u!50 &1243109396
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1243109391}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
+--- !u!114 &1243109397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1243109391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e4f254a69516f34e8722342a79ce7fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyRangedWeapon
+  damage: 5
+  range: 8
+  delay: 2
+  isBetterAttack: 0
+--- !u!58 &1243109398
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1243109391}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: -0.0013292753, y: 0}
+  m_Radius: 0.2679637
 --- !u!1001 &1261993415
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10609,6 +10717,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BossPoint
   respawnPoint: {fileID: 519148037}
   light: {fileID: 519115521}
+  bossHPCanvas: {fileID: 1221383567}
+  boss: {fileID: 1243109391}
 --- !u!1 &1393336956
 GameObject:
   m_ObjectHideFlags: 0
@@ -12490,6 +12600,7 @@ MonoBehaviour:
   objList:
   - {fileID: 329935707198677386, guid: 6c0bbe8c2abe5684e85f488e875dac02, type: 3}
   - {fileID: 4766832611570348663, guid: 64c44d8cb81cdcd4c86acd1ae7b01ef0, type: 3}
+  - {fileID: 1253688795276615262, guid: d671027e46e002a429e26d25fede4534, type: 3}
 --- !u!4 &1662056033
 Transform:
   m_ObjectHideFlags: 0
@@ -16167,6 +16278,7 @@ MonoBehaviour:
   damage: 3
   range: 7
   delay: 2
+  isBetterAttack: 0
 --- !u!114 &1973488857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16397,7 +16509,7 @@ MonoBehaviour:
   canAttack: 0
   playerAnimator: {fileID: 230854257}
   attackPoint: {fileID: 1623063586}
-  attackRadius: 1
+  attackRadius: 0.1
   monsterLayer:
     serializedVersion: 2
     m_Bits: 4096

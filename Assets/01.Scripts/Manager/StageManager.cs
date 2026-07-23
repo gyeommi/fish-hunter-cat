@@ -108,9 +108,18 @@ public class StageManager : MonoBehaviour
 
     public void ResetEnemy()
     {
-        foreach (EnemyController enemy in enemies)
+        BossController boss = FindFirstObjectByType<BossController>();
+
+        if (boss != null && boss.gameObject.activeInHierarchy)
         {
-            enemy.ResetEnemy();
+            boss.ResetBoss();
+        }
+        else
+        {
+            foreach (EnemyController enemy in enemies)
+            {
+                enemy.ResetEnemy();
+            }
         }
         deadEnemies.Clear();
     }

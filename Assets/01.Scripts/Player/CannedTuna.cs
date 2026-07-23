@@ -49,6 +49,12 @@ public class CannedTuna : MonoBehaviour
             ReturnPool();
         }
 
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Boss"))
+        {
+            collision.gameObject.GetComponent<BossController>().TakeDamage(damage);
+            ReturnPool();
+        }
+
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") || collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
         {
             ReturnPool();

@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class EnemyDeadState : EnemyBaseState
+public class BossIdleState : BossBaseState
 {
-    public EnemyDeadState(EnemyController enemy, EnemyStateMachine stateMachine) : base(enemy, stateMachine)
+    public BossIdleState(BossController boss, BossStateMachine stateMachine) : base(boss, stateMachine)
     {
     }
 
@@ -10,7 +10,6 @@ public class EnemyDeadState : EnemyBaseState
     {
         base.Enter();
         //애니메이션 실행
-        enemy.PlayDeadAnim();
     }
 
     public override void Exit()
@@ -22,6 +21,11 @@ public class EnemyDeadState : EnemyBaseState
     public override void Update()
     {
         base.Update();
+        //감지 범위 내에 플레이어가 있는지 검사
+        //있으면 Trace 상태로 변경..!
+
+        if (boss.IsDetectPlayer())
+            stateMachine.ChangeState(stateMachine.traceState);
     }
 
     public override void FixedUpdate()

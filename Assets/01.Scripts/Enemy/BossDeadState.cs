@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class EnemyDeadState : EnemyBaseState
+public class BossDeadState : BossBaseState
 {
-    public EnemyDeadState(EnemyController enemy, EnemyStateMachine stateMachine) : base(enemy, stateMachine)
+    public BossDeadState(BossController boss, BossStateMachine stateMachine) : base(boss, stateMachine)
     {
     }
 
@@ -10,7 +10,7 @@ public class EnemyDeadState : EnemyBaseState
     {
         base.Enter();
         //애니메이션 실행
-        enemy.PlayDeadAnim();
+        boss.PlayDeadAnim();
     }
 
     public override void Exit()

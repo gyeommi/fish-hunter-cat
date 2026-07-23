@@ -307,6 +307,7 @@ MonoBehaviour:
   damage: 3
   range: 8
   delay: 2
+  isBetterAttack: 0
 --- !u!114 &108811908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17814,6 +17815,7 @@ MonoBehaviour:
   damage: 3
   range: 8
   delay: 2
+  isBetterAttack: 0
 --- !u!114 &1284663653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18512,6 +18514,7 @@ MonoBehaviour:
   objList:
   - {fileID: 329935707198677386, guid: 6c0bbe8c2abe5684e85f488e875dac02, type: 3}
   - {fileID: 4766832611570348663, guid: 64c44d8cb81cdcd4c86acd1ae7b01ef0, type: 3}
+  - {fileID: 1253688795276615262, guid: d671027e46e002a429e26d25fede4534, type: 3}
 --- !u!4 &1375765034
 Transform:
   m_ObjectHideFlags: 0
@@ -20311,6 +20314,7 @@ MonoBehaviour:
   damage: 3
   range: 8
   delay: 2
+  isBetterAttack: 0
 --- !u!114 &1528567079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21012,6 +21016,7 @@ MonoBehaviour:
   damage: 3
   range: 8
   delay: 2
+  isBetterAttack: 0
 --- !u!114 &1650099274
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22322,7 +22327,7 @@ MonoBehaviour:
   canAttack: 0
   playerAnimator: {fileID: 1924310190}
   attackPoint: {fileID: 2085118335}
-  attackRadius: 1
+  attackRadius: 0.1
   monsterLayer:
     serializedVersion: 2
     m_Bits: 4096
@@ -23862,6 +23867,7 @@ MonoBehaviour:
   damage: 3
   range: 8
   delay: 2
+  isBetterAttack: 0
 --- !u!50 &2044364633
 Rigidbody2D:
   serializedVersion: 5
@@ -24164,6 +24170,7 @@ MonoBehaviour:
   damage: 3
   range: 8
   delay: 2
+  isBetterAttack: 0
 --- !u!114 &2117362103
 MonoBehaviour:
   m_ObjectHideFlags: 0

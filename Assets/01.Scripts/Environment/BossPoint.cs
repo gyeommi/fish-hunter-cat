@@ -5,6 +5,8 @@ public class BossPoint : MonoBehaviour
 {
     [SerializeField] Transform respawnPoint;
     [SerializeField] Light2D light;
+    [SerializeField] GameObject bossHPCanvas;
+    [SerializeField] GameObject boss;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -16,6 +18,9 @@ public class BossPoint : MonoBehaviour
             Color color;
             if (ColorUtility.TryParseHtmlString("#5E1A1B", out color))
                 light.color = color;
+
+            bossHPCanvas.SetActive(true);
+            boss.SetActive(true);
 
             gameObject.SetActive(false);
         }

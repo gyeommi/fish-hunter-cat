@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEngine.Rendering.DebugUI;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -36,6 +36,24 @@ public class PlayerController : MonoBehaviour
     public bool dashPressed;
     public bool meleeAttackPressed;
     public bool rangedAttackPressed;
+
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        respawnPoint = GameObject.FindWithTag("Respawn").transform;
+        transform.position = respawnPoint.position;
+    }
+
 
     private void Awake()
     {

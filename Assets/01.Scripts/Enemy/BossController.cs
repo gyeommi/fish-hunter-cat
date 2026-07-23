@@ -1,32 +1,38 @@
-using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class EnemyController : MonoBehaviour
+public class BossController : MonoBehaviour
 {
-    EnemyStateMachine stateMachine;
+    BossStateMachine stateMachine;
 
     [SerializeField] float maxHP;
     [SerializeField] float nowHP;
 
     [SerializeField] float detectRange;
+    [SerializeField] float defenseRange;
     [SerializeField] float attackRange;
 
-    [SerializeField] bool canFly;
+    [SerializeField] GameObject bossHPCanvas;
+
+    public GameObject goldFish;
+    public bool isDefense = false;
+    public int attackCount = 0;
 
     float moveSpeed;
     float attackCoolTime = 1f;
     float attackTimer;
-
-    Transform target;
-    SpriteRenderer sr;
-    
-    EnemyWeapon enemyWeapon;
-
-    Tween idleTween;
+    float defenseCoolTime = 8f;
+    float defenseTimer;
 
     Vector3 startPos;
 
+    Transform target;
+    
+    SpriteRenderer sr;
     Animator animator;
+    int isMove;
+
+    EnemyWeapon enemyWeapon;
 
     private void OnEnable()
     {
@@ -37,36 +43,33 @@ public class EnemyController : MonoBehaviour
     {
         startPos = transform.position;
 
-        StageManager.instance.RegisterEnemy(this);
-        
-        moveSpeed = 3f;
+        moveSpeed = 4f;
 
         sr = GetComponent<SpriteRenderer>();
 
         enemyWeapon = GetComponent<EnemyWeapon>();
         target = GameObject.FindWithTag("Player").transform;
 
-        stateMachine = new EnemyStateMachine(this);
+        stateMachine = new BossStateMachine(this);
         stateMachine.ChangeState(stateMachine.idleState);
 
         animator = GetComponent<Animator>();
+        isMove = Animator.StringToHash("isMove");
     }
 
     void Update()
     {
         attackTimer += Time.deltaTime;
+        defenseTimer += Time.deltaTime;
+
         stateMachine.Update();
     }
 
-    public void ResetEnemy()
+    public void ResetBoss()
     {
-        idleTween?.Kill();
-        idleTween = null;
         transform.position = startPos;
 
         nowHP = maxHP;
-
-        gameObject.SetActive(true);
 
         stateMachine.ChangeState(stateMachine.idleState);
         enemyWeapon.CanAttack(false);
@@ -75,6 +78,11 @@ public class EnemyController : MonoBehaviour
     public bool IsDetectPlayer()
     {
         return Vector2.Distance(transform.position, target.position) <= detectRange;
+    }
+    
+    public bool IsDefenseRange()
+    {
+        return Vector2.Distance(transform.position, target.position) <= defenseRange;
     }
 
     public bool IsAttackRange()
@@ -91,24 +99,19 @@ public class EnemyController : MonoBehaviour
 
         float distance = Vector3.Distance(transform.position, target.position);
 
-        enemyWeapon.SetAttackType(false);
         enemyWeapon.SetDirection(GetDirection());
         enemyWeapon.SetDistance(distance);
         enemyWeapon.CanAttack(true);
     }
 
-    public void Idle()
+    public void SetAttack(bool isBett)
     {
-        if (idleTween != null && idleTween.IsActive())
-            return;
-
-        idleTween = transform.DOMoveX(startPos.x + 2f, 1f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.Linear);
+        enemyWeapon.SetAttackType(isBett);
     }
 
     public void Trace()
     {
-        idleTween?.Kill();
-        idleTween = null;
+        Debug.Log("Trace");
 
         enemyWeapon.CanAttack(false);
 
@@ -118,30 +121,34 @@ public class EnemyController : MonoBehaviour
 
     void Move()
     {
-        if (canFly)
-            transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
-        else
-            transform.position = Vector3.MoveTowards(transform.position, transform.position, moveSpeed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
     }
 
     Vector2 GetDirection()
     {
         return target.position - transform.position;
     }
-
+    
     bool CheckFlip()
     {
         return transform.position.x > target.position.x ? true : false;
     }
 
+    public bool CanDefense()
+    {
+        return defenseTimer >= defenseCoolTime;
+    }
+
     public void TakeDamage(float damage)
     {
+        if (isDefense)
+            return;
+
         nowHP -= damage;
+        
+        SetHPBar();
 
-        sr.DOKill();
-
-        sr.color = Color.white;
-        sr.DOColor(Color.red, 0.2f).OnComplete(() => { sr.DOColor(Color.white, 0.2f); });
+        animator.SetTrigger("damage");
 
         if (nowHP <= 0)
         {
@@ -149,24 +156,61 @@ public class EnemyController : MonoBehaviour
             Die();
         }
     }
-    
+
+    void SetHPBar()
+    {
+        bossHPCanvas.transform.GetChild(1).GetComponent<Image>().fillAmount = nowHP / maxHP;
+    }
+
+    public void Defense()
+    {
+        defenseTimer = 0f;
+        isDefense = true;
+        PlayDefenseAnim();
+    }
+
     void Die()
     {
         stateMachine.ChangeState(stateMachine.deadState);
+        
+        goldFish.SetActive(true);
+        bossHPCanvas.SetActive(false);
+    }
+
+    public void PlayMoveAnim(bool value)
+    {
+        animator.SetBool(isMove, value);
+    }
+
+    public void PlayNormalAttackAnim()
+    {
+        animator.SetTrigger("attack1");
+    }
+
+    public void PlayBetterAttackAnim()
+    {
+        animator.SetTrigger("attack2");
+    }
+
+    public void PlayDefenseAnim()
+    {
+        enemyWeapon.CanAttack(false);
+
+        animator.SetTrigger("defense");
     }
 
     public void PlayDeadAnim()
     {
-        idleTween?.Kill();
-        idleTween = null;
+        animator.SetTrigger("dead");
+    }
 
-        enemyWeapon.CanAttack(false);
-
-        animator.SetTrigger("Dead");
+    public void EndDefense()
+    {
+        isDefense = false;
     }
 
     public void DeadEnd()
     {
-        StageManager.instance.RemoveEnemy(gameObject, startPos);
+        gameObject.SetActive(false);
     }
 }

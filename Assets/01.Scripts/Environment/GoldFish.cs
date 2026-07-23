@@ -9,6 +9,7 @@ public class GoldFish : MonoBehaviour
             PlayerStats.instance.SaveData();
             StageManager.instance.GameEnd();
             gameObject.SetActive(false);
+            collision.gameObject.SetActive(false);
         }
     }
 }
