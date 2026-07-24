@@ -12,6 +12,8 @@ public class BossPoint : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
+            SoundManager.instance.PlaySFX(SFXType.SmallFish);
+
             collision.gameObject.GetComponent<PlayerController>().SetRespawnPoint(respawnPoint);
             StageManager.instance.DestroyEnemy();
 

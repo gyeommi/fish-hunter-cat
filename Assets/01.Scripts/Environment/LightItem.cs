@@ -6,6 +6,8 @@ public class LightItem : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
+            SoundManager.instance.PlaySFX(SFXType.SmallFish);
+
             collision.GetComponent<PlayerController>().EnableLight();
             gameObject.SetActive(false);
         }
