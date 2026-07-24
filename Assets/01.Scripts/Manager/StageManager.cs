@@ -61,6 +61,8 @@ public class StageManager : MonoBehaviour
         SceneManager.LoadScene(currentStage);
 
         SoundManager.instance.PlayBGM((BGMType)currentStage);
+
+        Time.timeScale = 1f;
     }
 
     public void NextStage()
@@ -78,6 +80,8 @@ public class StageManager : MonoBehaviour
     {
         SceneManager.LoadScene("00.Start");
         SoundManager.instance.PlayBGM(BGMType.Start);
+        currentStage = 0;
+        PlayerStats.instance.LoadData();
     }
 
     public void GameOver()
