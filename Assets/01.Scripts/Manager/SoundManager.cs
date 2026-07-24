@@ -25,8 +25,8 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager instance;
 
-    [SerializeField] AudioSource bgmAudioSource;
-    [SerializeField] AudioSource sfxAudioSource;
+    public AudioSource bgmAudioSource;
+    public AudioSource sfxAudioSource;
 
     public AudioClip[] bgmClip;
     public AudioClip[] sfxClip;

@@ -77,6 +77,7 @@ public class StageManager : MonoBehaviour
     public void GameMain()
     {
         SceneManager.LoadScene("00.Start");
+        SoundManager.instance.PlayBGM(BGMType.Start);
     }
 
     public void GameOver()
@@ -87,6 +88,7 @@ public class StageManager : MonoBehaviour
     public void GameEnd()
     {
         SceneManager.LoadScene("06.End");
+        SoundManager.instance.PlayBGM(BGMType.Start);
     }
 
     public void RetryStage()

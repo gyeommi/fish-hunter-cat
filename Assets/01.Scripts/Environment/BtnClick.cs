@@ -25,4 +25,9 @@ public class BtnClick : MonoBehaviour
         SoundManager.instance.PlaySFX(SFXType.UIClick);
         StageManager.instance.GameExit();
     }
+
+    public void BtnSound()
+    {
+        SoundManager.instance.PlaySFX(SFXType.UIClick);
+    }
 }
