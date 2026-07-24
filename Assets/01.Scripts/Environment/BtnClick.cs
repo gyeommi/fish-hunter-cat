@@ -30,4 +30,14 @@ public class BtnClick : MonoBehaviour
     {
         SoundManager.instance.PlaySFX(SFXType.UIClick);
     }
+
+    public void TimeStop()
+    {
+        Time.timeScale = 0f;
+    }
+
+    public void TimeStart()
+    {
+        Time.timeScale = 1f;
+    }
 }

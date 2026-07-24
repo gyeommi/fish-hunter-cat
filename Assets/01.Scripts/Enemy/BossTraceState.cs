@@ -25,13 +25,22 @@ public class BossTraceState : BossBaseState
         base.Update();
         
         if (!boss.IsDetectPlayer())
+        {
             stateMachine.ChangeState(stateMachine.idleState);
-
-        if (boss.IsAttackRange())
-            stateMachine.ChangeState(stateMachine.attackState);
+            return;
+        }
 
         if (boss.IsDefenseRange() && boss.CanDefense())
+        {
             stateMachine.ChangeState(stateMachine.defenseState);
+            return;
+        }
+        
+        if (boss.IsAttackRange() && boss.CanAttack())
+        {
+            stateMachine.ChangeState(stateMachine.attackState);
+            return;
+        }
 
         boss.Trace();
     }

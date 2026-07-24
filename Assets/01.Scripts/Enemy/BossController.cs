@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,7 +20,7 @@ public class BossController : MonoBehaviour
     public int attackCount = 0;
 
     float moveSpeed;
-    float attackCoolTime = 1f;
+    float attackCoolTime = 1.5f;
     float attackTimer;
     float defenseCoolTime = 8f;
     float defenseTimer;
@@ -71,8 +72,22 @@ public class BossController : MonoBehaviour
 
         nowHP = maxHP;
 
-        stateMachine.ChangeState(stateMachine.idleState);
+        attackCount = 0;
+        isDefense = false;
+
+        attackTimer = 0f;
+        defenseTimer = 0f;
+
         enemyWeapon.CanAttack(false);
+
+        animator.ResetTrigger("attack1");
+        animator.ResetTrigger("attack2");
+        animator.ResetTrigger("defense");
+        animator.ResetTrigger("damage");
+
+        animator.Play("Idle");
+
+        stateMachine.ChangeState(stateMachine.idleState);
     }
 
     public bool IsDetectPlayer()
@@ -92,16 +107,51 @@ public class BossController : MonoBehaviour
 
     public void Attack()
     {
+        Debug.Log("Attack()");
+
         if (attackTimer < attackCoolTime)
             return;
 
         attackTimer = 0f;
+
+        if (attackCount < 3)
+        {
+            SetAttack(false);
+            PlayNormalAttackAnim();
+        }
+        else
+        {
+            SetAttack(true);
+            PlayBetterAttackAnim();
+        }
+    }
+
+    public void FireAttack()
+    {
+        Debug.Log($"FireAttack()");
 
         float distance = Vector3.Distance(transform.position, target.position);
 
         enemyWeapon.SetDirection(GetDirection());
         enemyWeapon.SetDistance(distance);
         enemyWeapon.CanAttack(true);
+    }
+
+    public void EndAttack()
+    {
+        attackCount++;
+
+        Debug.Log($"EndAttack() : {attackCount}");
+
+        if (attackCount >= 5)
+            attackCount = 0;
+
+        stateMachine.ChangeState(stateMachine.traceState);
+    }
+
+    public bool CanAttack()
+    {
+        return attackTimer >= attackCoolTime;
     }
 
     public void SetAttack(bool isBett)
@@ -121,7 +171,18 @@ public class BossController : MonoBehaviour
 
     void Move()
     {
-        transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
+        //transform.position = Vector3.MoveTowards(transform.position, new Vector3(target.position.x + 3f, transform.position.y, transform.position.z), moveSpeed * Time.deltaTime);
+
+        float stopDistance = 7f;
+
+        float distance = Mathf.Abs(target.position.x - transform.position.x);
+
+        if (distance > stopDistance)
+        {
+            float dir = Mathf.Sign(target.position.x - transform.position.x);
+
+            transform.position += Vector3.right * dir * moveSpeed * Time.deltaTime;
+        }
     }
 
     Vector2 GetDirection()
@@ -204,12 +265,18 @@ public class BossController : MonoBehaviour
         animator.SetTrigger("dead");
     }
 
+    public void EndDamage()
+    {
+        stateMachine.ChangeState(stateMachine.idleState);
+    }
+
     public void EndDefense()
     {
         isDefense = false;
+        stateMachine.ChangeState(stateMachine.idleState);
     }
 
-    public void DeadEnd()
+    public void EndDead()
     {
         gameObject.SetActive(false);
     }

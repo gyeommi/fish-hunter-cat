@@ -4866,7 +4866,7 @@ MonoBehaviour:
   m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 1
+  m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &760369465
@@ -10270,7 +10270,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyRangedWeapon
   damage: 5
   range: 8
-  delay: 2
+  delay: 1.5
   isBetterAttack: 0
 --- !u!58 &1243109398
 CircleCollider2D:

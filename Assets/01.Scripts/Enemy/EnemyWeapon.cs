@@ -4,7 +4,7 @@ public abstract class EnemyWeapon : MonoBehaviour
 {
     [SerializeField] protected int damage;
     [SerializeField] protected int range;
-    [SerializeField] protected int delay;
+    [SerializeField] protected float delay;
     [SerializeField] protected bool isBetterAttack;
 
     protected float distance;
